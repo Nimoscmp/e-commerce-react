@@ -67,35 +67,114 @@ const useStyles = makeStyles((theme) => ({
     },
 
     /*::::::::::::::::::::: 
-    ::::  Form styles  ::::
+    ::: Product styles ::::
     :::::::::::::::::::::::*/
 
-    //  Form general
-    flexColumn: {
+    //Products general
+    productBox : {
         display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        width: '80%',
-        padding: theme.spacing(1)
+        flexWrap: 'wrap',
+        padding: '0.5rem'
     },
 
-    //  Icons
-    iconBlue: {
-        color: '#002884',
-        transition: 'all 0.3s ease-out'
+    //Card
+    card : {
+        display: 'flex',
+        flexWrap: 'wrap',
+        maxWidth: '20rem',
+        fontFamily: 'Montserrat, sans-serif',
+        boxShadow: '2px 2px 8px #efefef',
+        borderRadius: '0.5rem',
+        margin: '0.5rem',
+        transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+        '&:hover' : {
+            transform: 'scale(1.007)',
+            transformOrigin: '50% 50%',
+            boxShadow: '3px 3px 15px #e0e0e0'
+        }
     },
-    iconGray: {
-        color: '#6e6e6e',
-        transition: 'all 0.3s ease-out'
+    cardHeader : {
+        width: '100%',
+        display: 'block',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        '&::after' : {
+            content: '""',
+            display: 'block',
+            width: '10rem',
+            height: '1px',
+            backgroundColor: '#b88423',
+            margin:' 1rem auto 1rem'
+        }
     },
-    //  Forgot password
-    orange : {
-        color: '#f79b11',
-        cursor: 'pointer',
+    cardTitle : {
         display: 'inline-block',
-        width: '50%',
-        paddingLeft: '0.8725rem'
-    }
+        width: '80%',
+        color: '#555',
+        margin: '0.5rem !important'
+    },
+    cardFav : {
+        marginLeft: '0.5rem',
+        color: '#198754'
+    },
+    cardLine : {
+        width: '90%'
+    },
+    cardPrice : {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        margin: '0.25rem 0'
+    },
+    cardPricePrev : {
+        color: '#888',
+        margin: '0 0.5rem'
+    },
+    cardPriceCurr : {
+        color : '#198754',
+        margin: '0 0.5rem'
+    },
+    cardImage: {
+        display: 'flex',
+        justifyContent: 'center'
+    },
+    cardImg : {
+        width: '60%'
+    },
+    cardRate : {
+        color: '#e69e10'
+    },
+    cardButtons : {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        width: '100%',
+        padding: '0.25rem'
+    },
+    cardBtnDetail : {
+        width: '80%',
+        margin: '0.125rem',
+        height: '2.25rem',
+        textTransform: 'capitalize',
+        color: 'gray',
+        '&:hover' : {
+            backgroundColor: 'gray',
+            color: '#fff'
+        }
+    },
+    cardBtnCart : {
+        width: '80%',
+        height: '2.25rem',
+        margin: '0.125rem',
+        textTransform: 'capitalize',
+        backgroundColor: '#590447',
+        color: '#fff',
+        '&:hover' : {
+            backgroundColor: '#7c0362',
+        }
+    },
+
 
 }));
 
