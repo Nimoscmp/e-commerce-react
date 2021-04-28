@@ -1,14 +1,16 @@
 import { applyMiddleware, createStore, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 //Ducks
-import { stylesHeader } from './ducks';
+import { cartReducer, productAddedReducer, stylesHeader } from './ducks';
 
 
 
 //Combine reducer
 const rootReducer = combineReducers({
     //Different reducers are consumed into store
-    style: stylesHeader
+    style: stylesHeader,
+    cart: cartReducer,
+    added: productAddedReducer
 })
 
 //Store data in redux devtools extension

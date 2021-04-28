@@ -19,12 +19,16 @@ const useStyles = makeStyles((theme) => ({
 
     //Header 
     headerViolet : {
+        position: 'fixed',
+        top: '0',
+        zIndex: '1000',
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'flex-end',
         width: '100%',
         height: '6rem',
-        backgroundColor: '#7c0362'
+        backgroundColor: '#7c0362',
+        boxShadow: '2px 2px 6px #dedede'
     },
     //Nav bar
     w40 : {
@@ -74,14 +78,18 @@ const useStyles = makeStyles((theme) => ({
     productBox : {
         display: 'flex',
         flexWrap: 'wrap',
+        marginTop: '6rem',
         padding: '0.5rem'
     },
 
     //Card
     card : {
         display: 'flex',
+        position: 'relative',
         flexWrap: 'wrap',
+        alignItems: 'flex-start',
         maxWidth: '20rem',
+        // height: '40rem',
         fontFamily: 'Montserrat, sans-serif',
         boxShadow: '2px 2px 8px #efefef',
         borderRadius: '0.5rem',
@@ -95,14 +103,20 @@ const useStyles = makeStyles((theme) => ({
     },
     cardHeader : {
         width: '100%',
-        display: 'block',
+        height: '4rem',
+        display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
+        position: 'relative'
+    },
+    cardHeaderWrap : {
+        width: '100%',
+        height: '5rem',
         '&::after' : {
             content: '""',
             display: 'block',
             width: '10rem',
-            height: '1px',
+            height: '2px',
             backgroundColor: '#b88423',
             margin:' 1rem auto 1rem'
         }
@@ -114,11 +128,11 @@ const useStyles = makeStyles((theme) => ({
         margin: '0.5rem !important'
     },
     cardFav : {
+        position: 'absolute',
+        top: '0.5rem',
+        right: '0.5rem',
         marginLeft: '0.5rem',
         color: '#198754'
-    },
-    cardLine : {
-        width: '90%'
     },
     cardPrice : {
         display: 'flex',
@@ -140,42 +154,59 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center'
     },
     cardImg : {
-        width: '60%'
+        width: '60%',
+        maxHeight: '280px'
     },
     cardRate : {
-        color: '#e69e10'
+        color: '#e69e10',
+        marginBottom: '6rem'
     },
     cardButtons : {
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
         width: '100%',
-        padding: '0.25rem'
+        padding: '0.25rem',
+        position: 'absolute',
+        bottom: '0.25rem'
     },
     cardBtnDetail : {
         width: '80%',
-        margin: '0.125rem',
-        height: '2.25rem',
-        textTransform: 'capitalize',
-        color: 'gray',
+        margin: '0.125rem !important',
+        height: '2.25rem !important',
+        fontFamily: 'Montserrat !important',
+        textTransform: 'capitalize !important',
+        color: 'gray !important',
         '&:hover' : {
-            backgroundColor: 'gray',
-            color: '#fff'
+            backgroundColor: 'gray !important',
+            color: '#fff !important'
         }
     },
     cardBtnCart : {
         width: '80%',
         height: '2.25rem',
-        margin: '0.125rem',
-        textTransform: 'capitalize',
-        backgroundColor: '#590447',
-        color: '#fff',
+        margin: '0.125rem !important',
+        fontFamily: 'Montserrat !important',
+        textTransform: 'capitalize !important',
+        backgroundColor: '#590447 !important',
+        color: '#fff !important',
         '&:hover' : {
-            backgroundColor: '#7c0362',
+            backgroundColor: '#7c0362 !important',
         }
     },
 
+    /*::::::::::::::::::::: 
+    ::::: Cart styles :::::
+    :::::::::::::::::::::::*/
 
+    cartBox : {
+        display: 'flex',
+        marginTop: '6rem'
+    },
+    cartDiv : {
+        width: '50%',
+        height: '11rem'
+    }
 }));
 
 export default useStyles;
