@@ -21,3 +21,35 @@ const types = {
 /*::::::::::::::::::::: 
 :::     Reducers    :::
 :::::::::::::::::::::::*/
+
+export function stylesHeader(state = initialSelection, action) {
+    switch (action.type) {
+        case types.SELECT_CART:
+            return {
+                products: false,
+                cart: true
+            }
+        case types.SELECT_PRODUCTS:
+            return {
+                products: true,
+                cart: false
+            }
+        default:
+            return state;
+    }
+}
+
+/*::::::::::::::::::::: 
+:::     Actions     :::
+:::::::::::::::::::::::*/
+
+export const select_cart_action = () => async (dispatch) => {
+    dispatch({
+        type: types.SELECT_CART
+    })
+}
+export const select_products_action = () => async (dispatch) => {
+    dispatch({
+        type: types.SELECT_PRODUCTS
+    })
+}

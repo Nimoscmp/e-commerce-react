@@ -1,10 +1,17 @@
-import Products from "./components/Products";
-
+import { Provider } from "react-redux";
+import Main from "./components/Main";
+import generateStore from "./redux/header/store";
 
 function App() {
+
+  const store = generateStore();
+
   return (
     <>
-      <Products />
+      <Provider
+        store={store}>
+        <Main />
+      </Provider>
     </>
   );
 }

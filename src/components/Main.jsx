@@ -1,15 +1,11 @@
+import Header from "./products/Header";
 
 const Products = () => {
 
     return (  
         <>
-            <header>
-                <ul>
-                    <li>Productos</li>
-                    <li>Carrito</li>
-                    <li>Cerrar sesión</li>
-                </ul>
-            </header>
+            
+            <Header />
 
             <main>
                 <div id="card1">

@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 //Ducks
-import { stylesHeader } from './mainDucks';
+import { stylesHeader } from './ducks';
 
 
 

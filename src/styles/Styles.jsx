@@ -42,7 +42,8 @@ const useStyles = makeStyles((theme) => ({
     marginTwo : {
         margin: '2.25rem 1.75rem 0.25rem !important',
         padding: '0',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        transition: 'all 0.3s ease-out'
     },
     //Mobile bar
     bar : {
