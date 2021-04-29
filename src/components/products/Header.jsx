@@ -2,9 +2,16 @@ import useStyles from "../../styles/Styles";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { select_cart_action, select_products_action } from "../../redux/ducks";
+import {auth} from '../../firebase';
+import {withRouter} from "react-router-dom"
 
-const Header = () => {
-
+const Header = (props) => {
+    const cerrarSesion = () => {
+        auth.signOut()
+        .then(() =>{
+            props.history.push('/')
+        })
+ }
     const classes = useStyles();
 
     const { products: productsTab , cart: cartTab } = useSelector(state => state.style)
@@ -22,6 +29,7 @@ const Header = () => {
                         style={{color: cartTab ? 'white' : 'inherit'}}
                         onClick={() => dispatch(select_cart_action())}>Carrito</ul>
                     <ul className={classes.marginTwo}
+                        onClick={() => cerrarSesion()}
                         style={{}}>Cerrar sesión</ul>
                 </li>
                 <div 
@@ -32,4 +40,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default withRouter(Header)
