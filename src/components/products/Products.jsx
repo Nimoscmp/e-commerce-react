@@ -13,9 +13,9 @@ const Products = () => {
 
     //  Local states
     const [productsApi, setProductsApi] = useState([]);
+    const [clickedAdd, setClickedAdd] = useState(false);
     
     const {id: idP, title: titleP, price: priceP, img: imgP} = useSelector(state => state.added);
-    const cartArray = useSelector(state => state.added);
 
     useEffect(() => {
         const getData = async() => {
@@ -29,7 +29,8 @@ const Products = () => {
     }, [])
 
     const addToCart = (_id, _title, _price, _img) => {
-        dispatch(product_added_action(_id, _title, _price, _img))
+        setClickedAdd(true);
+        dispatch(product_added_action(_id, _title, _price, _img));
     }
 
     useEffect(() => {
@@ -42,16 +43,14 @@ const Products = () => {
             }
 
             dispatch(add_to_cart_action(productsArray));
+            setClickedAdd(false);
         }
-        addProducts();
+        if(clickedAdd){
+            addProducts();
+        }
+
         // eslint-disable-next-line 
     }, [idP, titleP, priceP, imgP])
-
-    useEffect(() => {
-        if(cartArray?.length > 0){
-            cartArray.shift();
-        }
-    }, [])
 
     return (
     <>

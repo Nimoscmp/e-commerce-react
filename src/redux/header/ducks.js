@@ -58,9 +58,7 @@ export function cartReducer(state = initialCart, action) {
                 action.payload
             ]
         case types.REMOVE_FROM_CART:
-            return [
-                ...state
-            ]
+            return action.payload
         default:
             return state;
     }
@@ -101,6 +99,12 @@ export const add_to_cart_action = (_product) => async (dispatch) => {
     dispatch({
         type: types.ADD_TO_CART,
         payload: _product
+    })
+}
+export const remove_from_cart_action = (cartFiltered) => async (dispatch) => {
+    dispatch({
+        type: types.REMOVE_FROM_CART,
+        payload: cartFiltered
     })
 }
 //  Product added

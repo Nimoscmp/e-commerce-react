@@ -201,11 +201,63 @@ const useStyles = makeStyles((theme) => ({
 
     cartBox : {
         display: 'flex',
-        marginTop: '6rem'
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        marginTop: '6rem',
+        fontFamily: 'Montserrat'
     },
     cartDiv : {
-        width: '50%',
-        height: '11rem'
+        position: 'relative',
+        display: 'flex',
+        width: '60%',
+        height: '12rem',
+        margin: '0.75rem',
+        boxShadow: '2px 2px 8px #efefef',
+        borderRadius: '0.5rem',
+        transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+        '&:hover' : {
+            transform: 'scale(1.007)',
+            transformOrigin: '50% 50%',
+            boxShadow: '3px 3px 15px #e0e0e0'
+        }
+    },
+    cartDelete : {
+        position: 'absolute',
+        top: '0.5rem',
+        right: '0.5rem',
+        cursor: 'pointer',
+        color: '#aaa',
+        transition: 'all 0.3s ease-out',
+        '&:hover' : {
+            color: '#777'
+        }
+    },
+    cartText : {
+        width: '70%',
+        padding: '0.5rem'
+    },
+    cartTitle : {
+        color: '#9c9297',
+        fontWeight: '400',
+        padding: '0 0.5rem'
+    },
+    cartPrice : {
+        padding: '0 0.5rem'    
+    },
+    cartImage : {
+        display: 'flex',
+        alignItems: 'center',
+        width: '30%',
+        padding: '0.5rem'
+    },
+    cartImg : {
+        width: '60%'
+    },
+    cartPay : {
+        width: '60%',
+        color: '#7c0362 !important',
+        borderColor: '#7c0362 !important',
+        textTransform: 'capitalize !important'
     }
 }));
 
