@@ -234,7 +234,8 @@ const useStyles = makeStyles((theme) => ({
     },
     cartText : {
         width: '70%',
-        padding: '0.5rem'
+        padding: '0.5rem',
+        position: 'relative'
     },
     cartTitle : {
         color: '#9c9297',
@@ -253,11 +254,58 @@ const useStyles = makeStyles((theme) => ({
     cartImg : {
         width: '60%'
     },
+    cartMoreLess : {
+        display: 'flex',
+        margin: '1rem 0 0 0',
+        borderRadius: '10px',
+        position: 'absolute',
+        bottom: '0.5rem',
+        left: '0.5rem'
+    },
+    cartLess : {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '40px',
+        height: '40px',
+        padding: '0',
+        backgroundColor: '#d99ab9',
+        borderRadius: '10px 0 0 10px'
+    },
+    cartNumber : {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '40px',
+        height: '40px',
+        padding: '0',
+        backgroundColor: '#f2ebef'
+    },
+    cartMore : {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '40px',
+        height: '40px',
+        padding: '0',
+        backgroundColor: '#d99ab9',
+        borderRadius: ' 0 10px 10px 0'
+    },
+    cartAdd : {
+        color: '#fff',
+        margin : '0',
+        cursor: 'pointer'
+    },
     cartPay : {
-        width: '60%',
+        width: '60% !important',
         color: '#7c0362 !important',
         borderColor: '#7c0362 !important',
-        textTransform: 'capitalize !important'
+        textTransform: 'capitalize !important',
+        fontFamily: 'Montserrat',
+        '&:hover' : {
+            backgroundColor: '#7c0362 !important',
+            color: '#fff !important'
+        }
     }
 }));
 

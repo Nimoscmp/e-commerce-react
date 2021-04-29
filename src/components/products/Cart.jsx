@@ -1,5 +1,5 @@
 import { Button } from "@material-ui/core";
-import { CancelPresentation } from "@material-ui/icons";
+import { AddRounded, CancelPresentation, RemoveRounded } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux"
 import { remove_from_cart_action } from "../../redux/header/ducks";
 import useStyles from "../../styles/Styles"
@@ -20,8 +20,9 @@ const Cart = () => {
 
     return (
     <>
+        {defCartArray.length > 0 ?
+
         <main className={classes.cartBox}>
-            
             {defCartArray.map(item => (
             <div 
                 key={item.id}
@@ -34,6 +35,15 @@ const Cart = () => {
                 <div className={classes.cartText}>
                     <h3 className={classes.cartTitle}>{item.title}</h3>
                     <span className={classes.cartPrice}><strong>${item.price}</strong></span>
+                    <div className={classes.cartMoreLess}>
+                        <span className={classes.cartLess}>
+                            <RemoveRounded className={classes.cartAdd}/>
+                        </span>
+                        <span className={classes.cartNumber}>1</span>
+                        <span className={classes.cartMore}>
+                            <AddRounded className={classes.cartAdd}/>
+                        </span>
+                    </div>
                 </div>
 
                 <div className={classes.cartImage}>
@@ -43,9 +53,14 @@ const Cart = () => {
             ))}
             
             <Button variant="outlined" className={classes.cartPay}>Pagar total</Button>
-            
         </main>
-        
+
+        :
+
+        <main className={classes.cartBox}>
+            <h2>No has agregado productos al carrito</h2>
+        </main>
+        }
     </>
     )
 }
