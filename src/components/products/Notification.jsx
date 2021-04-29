@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { hide_notif_action } from "../../redux/header/ducks";
+import { hide_notif_action } from "../../redux/ducks";
 import useStyles from "../../styles/Styles"
 
 const Notification = () => {

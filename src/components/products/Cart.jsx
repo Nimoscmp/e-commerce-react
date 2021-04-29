@@ -1,7 +1,7 @@
 import { Button } from "@material-ui/core";
 import { AddRounded, CancelPresentation, RemoveRounded } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux"
-import { remove_from_cart_action } from "../../redux/header/ducks";
+import { remove_from_cart_action } from "../../redux/ducks";
 import useStyles from "../../styles/Styles"
 
 const Cart = () => {

@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
 import Main from "./components/Main";
-import generateStore from "./redux/header/store";
+import generateStore from "./redux/store";
 
 function App() {
 

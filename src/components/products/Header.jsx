@@ -1,7 +1,7 @@
 import useStyles from "../../styles/Styles";
 //redux
 import { useDispatch, useSelector } from "react-redux";
-import { select_cart_action, select_products_action } from "../../redux/header/ducks";
+import { select_cart_action, select_products_action } from "../../redux/ducks";
 
 const Header = () => {
 
