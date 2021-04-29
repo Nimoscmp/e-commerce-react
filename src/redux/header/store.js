@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 //Ducks
-import { cartReducer, productAddedReducer, stylesHeader } from './ducks';
+import { cartReducer, notifReducer, productAddedReducer, stylesHeader } from './ducks';
 
 
 
@@ -10,7 +10,8 @@ const rootReducer = combineReducers({
     //Different reducers are consumed into store
     style: stylesHeader,
     cart: cartReducer,
-    added: productAddedReducer
+    added: productAddedReducer,
+    notif: notifReducer
 })
 
 //Store data in redux devtools extension

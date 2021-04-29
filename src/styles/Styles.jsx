@@ -79,7 +79,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexWrap: 'wrap',
         marginTop: '6rem',
-        padding: '0.5rem'
+        padding: '0.5rem',
+        position: 'relative'
     },
 
     //Card
@@ -306,6 +307,31 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: '#7c0362 !important',
             color: '#fff !important'
         }
+    },
+
+    /*::::::::::::::::::::: 
+    ::Notification styles::
+    :::::::::::::::::::::::*/
+
+    notiDiv : {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'fixed',
+        zIndex: '1001',
+        bottom: '1rem',
+        left: '1rem',
+        height: '5rem',
+        borderRadius: '10px',
+        boxShadow: '2px 2px 8px #ccc',
+        backgroundColor: '#567a56',
+        color: '#fff',
+        transition: 'all 0.3s ease-in-out'
+    },
+    notiText : {
+        fontFamily: 'Montserrat',
+        fontWeight: '400',
+        margin: '0.5rem 1rem'
     }
 }));
 

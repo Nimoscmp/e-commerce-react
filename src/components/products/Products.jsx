@@ -3,7 +3,8 @@ import { BookmarkRounded, Grade } from '@material-ui/icons';
 import { Button } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { add_to_cart_action, product_added_action } from "../../redux/header/ducks";
+import { add_to_cart_action, product_added_action, show_notif_action } from "../../redux/header/ducks";
+import Notification from "./Notification";
 
 const Products = () => {
 
@@ -16,6 +17,7 @@ const Products = () => {
     const [clickedAdd, setClickedAdd] = useState(false);
     
     const {id: idP, title: titleP, price: priceP, img: imgP} = useSelector(state => state.added);
+    const showNotif = useSelector(state => state.notif);
 
     useEffect(() => {
         const getData = async() => {
@@ -31,6 +33,7 @@ const Products = () => {
     const addToCart = (_id, _title, _price, _img) => {
         setClickedAdd(true);
         dispatch(product_added_action(_id, _title, _price, _img));
+        dispatch(show_notif_action());
     }
 
     useEffect(() => {
@@ -94,6 +97,7 @@ const Products = () => {
             </div>
             ))}
         </main>
+        <Notification />
     </>
     )
 }

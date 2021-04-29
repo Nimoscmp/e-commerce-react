@@ -11,7 +11,8 @@ const initialSelection = {
 const initialCart = [];
 // Initial product added
 const productAdded = {}
-
+// Initial status notification
+const stateNotif = false;
 
 /*::::::::::::::::::::: 
 :::      Types      :::
@@ -26,7 +27,10 @@ const types = {
     ADD_TO_CART: 'ADD_TO_CART',
     REMOVE_FROM_CART: 'REMOVE_FROM_CART',
     //  Product added
-    PRODUCT_ADDED: 'PRODUCT_ADDED' 
+    PRODUCT_ADDED: 'PRODUCT_ADDED', 
+    //  Notifications
+    SHOW_NOTIFICATION: 'SHOW_NOTIFICATION',
+    HIDE_NOTIFICATION: 'HIDE_NOTIFICATION'
 }
 
 /*::::::::::::::::::::: 
@@ -78,6 +82,17 @@ export function productAddedReducer(state = productAdded, action) {
     }
 }
 
+export function notifReducer(state = stateNotif, action) {
+    switch (action.type) {
+        case types.SHOW_NOTIFICATION:
+            return true;
+        case types.HIDE_NOTIFICATION:
+            return false;
+        default:
+            return state;
+    }
+}
+
 /*::::::::::::::::::::: 
 :::     Actions     :::
 :::::::::::::::::::::::*/
@@ -117,5 +132,16 @@ export const product_added_action = (_id, _title, _price, _img) => async (dispat
             price: _price,
             img: _img
         }
+    })
+}
+//  Notifications
+export const show_notif_action = () => async (dispatch) => {
+    dispatch({
+        type: types.SHOW_NOTIFICATION
+    })
+}
+export const hide_notif_action = () => async (dispatch) => {
+    dispatch({
+        type: types.HIDE_NOTIFICATION
     })
 }
