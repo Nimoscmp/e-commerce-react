@@ -7,12 +7,14 @@ const initialSelection = {
     products: true,
     cart: false
 }
-// Initial Cart
+//  Initial Cart
 const initialCart = [];
-// Initial product added
+//  Initial product added
 const productAdded = {}
-// Initial status notification
+//  Initial status notification
 const stateNotif = false;
+//  Initial status show modal details
+const showModal = false;
 
 /*::::::::::::::::::::: 
 :::      Types      :::
@@ -30,7 +32,10 @@ const types = {
     PRODUCT_ADDED: 'PRODUCT_ADDED', 
     //  Notifications
     SHOW_NOTIFICATION: 'SHOW_NOTIFICATION',
-    HIDE_NOTIFICATION: 'HIDE_NOTIFICATION'
+    HIDE_NOTIFICATION: 'HIDE_NOTIFICATION',
+    //  Modal dialog
+    SHOW_MODAL: 'SHOW_MODAL',
+    HIDE_MODAL: 'HIDE_MODAL',
 }
 
 /*::::::::::::::::::::: 
@@ -93,6 +98,17 @@ export function notifReducer(state = stateNotif, action) {
     }
 }
 
+export function showModalReducer(state = showModal, action) {
+    switch (action.type) {
+        case types.SHOW_MODAL:
+            return true;
+        case types.HIDE_MODAL:
+            return false;
+        default:
+            return state;
+    }
+}
+
 /*::::::::::::::::::::: 
 :::     Actions     :::
 :::::::::::::::::::::::*/
@@ -143,5 +159,16 @@ export const show_notif_action = () => async (dispatch) => {
 export const hide_notif_action = () => async (dispatch) => {
     dispatch({
         type: types.HIDE_NOTIFICATION
+    })
+}
+//  Modal
+export const show_modal_action = () => async (dispatch) => {
+    dispatch({
+        type: types.SHOW_MODAL
+    })
+}
+export const hide_modal_action = () => async (dispatch) => {
+    dispatch({
+        type: types.HIDE_MODAL
     })
 }

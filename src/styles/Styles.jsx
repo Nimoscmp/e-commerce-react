@@ -300,6 +300,7 @@ const useStyles = makeStyles((theme) => ({
     cartPay : {
         width: '60% !important',
         color: '#7c0362 !important',
+        margin: '0.25rem',
         borderColor: '#7c0362 !important',
         textTransform: 'capitalize !important',
         fontFamily: 'Montserrat',
@@ -332,7 +333,34 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: 'Montserrat',
         fontWeight: '400',
         margin: '0.5rem 1rem'
+    },
+
+
+    /*::::::::::::::::::::: 
+    :::: Modal styles  ::::
+    :::::::::::::::::::::::*/
+
+    modalTitle : {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        fontFamily: 'Montserrat'
+    },
+    modalh2 : {
+        margin: '0.4rem'
+    },
+    modalClose : {
+        margin: '0.4rem',
+        cursor: 'pointer',
+        color: '#aaa'
+    },
+    modalDesc : {
+        padding: '0.4rem'
+    },
+    modalParagh : {
+        margin: '0.25rem'
     }
+
 }));
 
 export default useStyles;

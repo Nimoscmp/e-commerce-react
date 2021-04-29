@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { hide_notif_action } from "../../redux/ducks";
 import useStyles from "../../styles/Styles"
@@ -15,6 +15,7 @@ const Notification = () => {
         setTimeout(() => {
             dispatch(hide_notif_action());
         }, 2000)
+        // eslint-disable-next-line    
     }, [showNotif])
 
     return (

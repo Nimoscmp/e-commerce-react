@@ -3,8 +3,9 @@ import { BookmarkRounded, Grade } from '@material-ui/icons';
 import { Button } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { add_to_cart_action, product_added_action, show_notif_action } from "../../redux/ducks";
+import { add_to_cart_action, hide_notif_action, product_added_action, show_modal_action, show_notif_action } from "../../redux/ducks";
 import Notification from "./Notification";
+import Modal from "./Modal";
 
 const Products = () => {
 
@@ -88,7 +89,10 @@ const Products = () => {
                     <Grade className={classes.cardRate}/>
                 </div>
                 <div className={classes.cardButtons}>
-                    <Button variant="outlined" className={classes.cardBtnDetail}>Ver detalles</Button>
+                    <Button 
+                        variant="outlined" 
+                        className={classes.cardBtnDetail}
+                        onClick={() => dispatch(show_modal_action())}>Ver detalles</Button>
                     <Button 
                         variant="contained" 
                         className={classes.cardBtnCart}
@@ -98,6 +102,7 @@ const Products = () => {
             ))}
         </main>
         <Notification />
+        <Modal />
     </>
     )
 }
