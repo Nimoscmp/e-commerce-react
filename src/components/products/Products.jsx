@@ -3,7 +3,7 @@ import { BookmarkRounded, Grade } from '@material-ui/icons';
 import { Button } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { add_to_cart_action, hide_notif_action, product_added_action, show_modal_action, show_notif_action } from "../../redux/ducks";
+import { add_to_cart_action, hide_notif_action, product_added_action, product_detailed_action, show_modal_action, show_notif_action } from "../../redux/ducks";
 import Notification from "./Notification";
 import Modal from "./Modal";
 
@@ -20,6 +20,7 @@ const Products = () => {
     const {id: idP, title: titleP, price: priceP, img: imgP} = useSelector(state => state.added);
     const showNotif = useSelector(state => state.notif);
 
+    //  Receive data from API
     useEffect(() => {
         const getData = async() => {
             const base_url = 'https://fakestoreapi.com/products';
@@ -31,12 +32,13 @@ const Products = () => {
         // eslint-disable-next-line
     }, [])
 
+    // Button action Add to Cart
     const addToCart = (_id, _title, _price, _img) => {
         setClickedAdd(true);
         dispatch(product_added_action(_id, _title, _price, _img));
         dispatch(show_notif_action());
     }
-
+    
     useEffect(() => {
         const addProducts = () => {
             const productsArray = {
@@ -52,9 +54,16 @@ const Products = () => {
         if(clickedAdd){
             addProducts();
         }
-
         // eslint-disable-next-line 
     }, [idP, titleP, priceP, imgP])
+
+    //  Button action Show details
+    const handleShowDetails = (item) => {
+        const {id, title, price, description, category, image} = item;
+
+        dispatch(product_detailed_action(id, title, price, description, category, image));
+        dispatch(show_modal_action());
+    }
 
     return (
     <>
@@ -63,7 +72,9 @@ const Products = () => {
             <div className={classes.card} key={item.id}>
                 <div className={classes.cardHeaderWrap}>
                     <div className={classes.cardHeader}>
-                        <h3 className={classes.cardTitle}>{item.title}</h3>
+                        <h3 className={classes.cardTitle}>
+                            {item.title.length > 40 ? `${item.title.slice(0, 40)}...` : item.title}
+                        </h3>
                         <BookmarkRounded className={classes.cardFav} fontSize="large"/>
                     </div>
                 </div>
@@ -92,7 +103,7 @@ const Products = () => {
                     <Button 
                         variant="outlined" 
                         className={classes.cardBtnDetail}
-                        onClick={() => dispatch(show_modal_action())}>Ver detalles</Button>
+                        onClick={() => handleShowDetails(item)}>Ver detalles</Button>
                     <Button 
                         variant="contained" 
                         className={classes.cardBtnCart}

@@ -15,6 +15,8 @@ const productAdded = {}
 const stateNotif = false;
 //  Initial status show modal details
 const showModal = false;
+//  Initial product detailed
+const productDetailed = {}
 
 /*::::::::::::::::::::: 
 :::      Types      :::
@@ -36,6 +38,9 @@ const types = {
     //  Modal dialog
     SHOW_MODAL: 'SHOW_MODAL',
     HIDE_MODAL: 'HIDE_MODAL',
+    //  Product detailed
+    PRODUCT_DETAILED: 'PRODUCT_DETAILED'
+
 }
 
 /*::::::::::::::::::::: 
@@ -109,6 +114,22 @@ export function showModalReducer(state = showModal, action) {
     }
 }
 
+export function productDetailedReducer(state = productDetailed, action) {
+    switch (action.type) {
+        case types.PRODUCT_DETAILED:
+            return {
+                id: action.payload.id,
+                title: action.payload.title,
+                price: action.payload.price,
+                description: action.payload.description,
+                category: action.payload.category,
+                img: action.payload.img
+            }
+        default:
+            return state;
+    }
+}
+
 /*::::::::::::::::::::: 
 :::     Actions     :::
 :::::::::::::::::::::::*/
@@ -170,5 +191,19 @@ export const show_modal_action = () => async (dispatch) => {
 export const hide_modal_action = () => async (dispatch) => {
     dispatch({
         type: types.HIDE_MODAL
+    })
+}
+//  Product added
+export const product_detailed_action = (_id, _title, _price, _description, _category, _img) => async (dispatch) => {
+    dispatch({
+        type: types.PRODUCT_DETAILED,
+        payload: {
+            id: _id,
+            title: _title,
+            price: _price,
+            description: _description,
+            category: _category,
+            img: _img
+        }
     })
 }
