@@ -3,7 +3,7 @@ import { BookmarkRounded, Grade } from '@material-ui/icons';
 import { Button, CircularProgress, MenuItem, TextField } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { add_to_cart_action, hide_notif_action, product_added_action, product_detailed_action, show_modal_action, show_notif_action } from "../../redux/ducks";
+import { add_to_cart_action, product_added_action, product_detailed_action, show_modal_action, show_notif_action } from "../../redux/ducks";
 import Notification from "./Notification";
 import Modal from "./Modal";
 
@@ -18,11 +18,9 @@ const Products = () => {
     const [clickedAdd, setClickedAdd] = useState(false);
     const [categorySelected, setCategorySelected] = useState("Todos");
     const [loaded, setLoaded] = useState(false);
-    const [prodAlready, setProdAlready] = useState(false);
     
     // Global states
     const {id: idP, title: titleP, price: priceP, img: imgP, quantity: quantityP} = useSelector(state => state.added);
-    const showNotif = useSelector(state => state.notif);
     const cartArray = useSelector(state => state.cart);
 
     //  Receive data from API
@@ -56,23 +54,22 @@ const Products = () => {
         setClickedAdd(true);
 
         let quantity = 1;
+        let indexCurr;
 
-        const productExists = cartArray.filter(item => item.id === _id)
+        const productExists = cartArray.filter((item, index) => {
+            if(item.id === _id){
+                indexCurr = index;
+            }
 
-        // cartArray[productExists.id - 1].quantity++;
+            return item.id === _id
+        })
+
         if(productExists.length === 0){
             dispatch(product_added_action(_id, _title, _price, _img, quantity));
         } else {
-            // setProdAlready(true);
-            // const handleAdd = i => {
-                // if(cartArray.length > 0){
-                //     ++cartArray[i].quantity;
-                // }
-                // dispatch(select_products_action());
-                // dispatch(select_cart_action())
-            // }
-            // handleAdd(index);
+            ++cartArray[indexCurr].quantity;
         }
+        // setClickedAdd(false);
 
         dispatch(show_notif_action());
     }

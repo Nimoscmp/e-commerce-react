@@ -23,14 +23,23 @@ const Modal = () => {
         setClickedAdd(true);
         
         let quantity = 1;
+        let indexCurr;
 
-        const productExists = cartArray.filter(item => item.id === _id)
+        const productExists = cartArray.filter((item, index) => {
+            if(item.id === _id){
+                indexCurr = index;
+            }
 
-        // cartArray[productExists.id - 1].quantity++;
+            return item.id === _id
+        })
+
         if(productExists.length === 0){
             dispatch(product_added_action(_id, _title, _price, _img, quantity));
+        } else {
+            ++cartArray[indexCurr].quantity;
         }
-
+        // setClickedAdd(false);
+        
         dispatch(show_notif_action());
     }
     

@@ -2,7 +2,7 @@ import { Button } from "@material-ui/core";
 import { AddRounded, CloseRounded, RemoveRounded } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { remove_from_cart_action, select_cart_action, select_products_action } from "../../redux/ducks";
+import { product_removed_action, remove_from_cart_action, select_cart_action, select_products_action } from "../../redux/ducks";
 import useStyles from "../../styles/Styles"
 
 const Cart = () => {
@@ -13,7 +13,6 @@ const Cart = () => {
     const dispatch = useDispatch();
     //Global states
     const cartArray = useSelector(state => state.cart);
-    const { products: productsTab } = useSelector(state => state.style);
     //Local state
     const [totalPrice, setTotalPrice] = useState(0);
 
@@ -22,6 +21,7 @@ const Cart = () => {
     const handleDelete = (id) => {
         const cartFiltered = cartArray.filter(item => item.id !== id);
         dispatch(remove_from_cart_action(cartFiltered));
+        dispatch(product_removed_action());
     }
 
     const handleSubstract = i => {
@@ -64,9 +64,11 @@ const Cart = () => {
 
     useEffect(() => {
         totalPriceCalc();
+        // eslint-disable-next-line
     }, [])
     useEffect(() => {
         totalPriceCalc();
+        // eslint-disable-next-line
     }, [cartArray])
 
     return (

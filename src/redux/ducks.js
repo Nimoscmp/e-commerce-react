@@ -31,7 +31,8 @@ const types = {
     ADD_TO_CART: 'ADD_TO_CART',
     REMOVE_FROM_CART: 'REMOVE_FROM_CART',
     //  Product added
-    PRODUCT_ADDED: 'PRODUCT_ADDED', 
+    PRODUCT_ADDED: 'PRODUCT_ADDED',
+    PRODUCT_REMOVED: 'PRODUCT_REMOVED',
     //  Notifications
     SHOW_NOTIFICATION: 'SHOW_NOTIFICATION',
     HIDE_NOTIFICATION: 'HIDE_NOTIFICATION',
@@ -90,6 +91,8 @@ export function productAddedReducer(state = productAdded, action) {
                 img: action.payload.img,
                 quantity: action.payload.quantity
             }
+        case types.PRODUCT_REMOVED:
+            return {}
         default:
             return state;
     }
@@ -128,17 +131,6 @@ export function productDetailedReducer(state = productDetailed, action) {
                 category: action.payload.category,
                 img: action.payload.img
             }
-        default:
-            return state;
-    }
-}
-
-export function quantityCartReducer(state = {quantity : 1}, action) {
-    switch (action.type) {
-        case types.QUANTITY_ADD:
-            return { quantity : state.quantity + 1 }
-        case types.QUANTITY_SUBSTRACT:
-            return { quantity : state.quantity - 1 }
         default:
             return state;
     }
@@ -186,6 +178,11 @@ export const product_added_action = (_id, _title, _price, _img, _quantity) => as
         }
     })
 }
+export const product_removed_action = () => async (dispatch) => {
+    dispatch({
+        type: types.PRODUCT_REMOVED,
+    })
+}
 //  Notifications
 export const show_notif_action = () => async (dispatch) => {
     dispatch({
@@ -220,16 +217,5 @@ export const product_detailed_action = (_id, _title, _price, _description, _cate
             category: _category,
             img: _img
         }
-    })
-}
-//  Quantity change
-export const quantity_add_action = () => async (dispatch) => {
-    dispatch({
-        type: types.QUANTITY_ADD
-    })
-}
-export const quantity_subtract_action = () => async (dispatch) => {
-    dispatch({
-        type: types.QUANTITY_SUBSTRACT
     })
 }
