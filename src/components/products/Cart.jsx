@@ -16,8 +16,6 @@ const Cart = () => {
     //Local state
     const [totalPrice, setTotalPrice] = useState(0);
 
-    // const defCartArray = cartArray.filter(item => item.id !== undefined);
-
     const handleDelete = (id) => {
         const cartFiltered = cartArray.filter(item => item.id !== id);
         dispatch(remove_from_cart_action(cartFiltered));
@@ -40,32 +38,27 @@ const Cart = () => {
         totalPriceCalc();
     }
 
-    // Total price
+    // Total price calculation
     const totalPriceCalc = () => {
-
-        var sum = []
+        var addUp = []
         var total = 0;
-
+        //  Do the add of the quantities if there are products in the cart
         if(cartArray.length > 0){
-
+            //  Map the cart and put each result of the price in addUp
             cartArray.map((item , index) => {
                 const mult = item.quantity * item.price;
-                sum[index] = mult;
+                addUp[index] = mult;
                 return true;
             })
-
-            sum.forEach(i => {
+            // Total all the elements of the array addUp
+            addUp.forEach(i => {
                 total += i;
             });
-
             setTotalPrice(total);
         }
     }
 
-    useEffect(() => {
-        totalPriceCalc();
-        // eslint-disable-next-line
-    }, [])
+    //  Calculate price when cartArray changes
     useEffect(() => {
         totalPriceCalc();
         // eslint-disable-next-line

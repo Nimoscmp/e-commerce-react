@@ -353,7 +353,11 @@ const useStyles = makeStyles((theme) => ({
     notiText : {
         fontFamily: 'Montserrat',
         fontWeight: '400',
-        margin: '0.5rem 1rem'
+        fontSize: '1rem',
+        margin: '0.5rem 0.5rem 0.5rem 1rem'
+    },
+    notiIcon : {
+        margin: '0.5rem 1rem 0.5rem 0.25rem !important'
     },
 
 

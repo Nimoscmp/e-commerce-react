@@ -8,17 +8,15 @@ import Notification from "./Notification";
 import Modal from "./Modal";
 
 const Products = () => {
-
+    //  Styles
     const classes = useStyles();
-
+    //  Dispatch
     const dispatch = useDispatch();
-
     //  Local states
     const [productsApi, setProductsApi] = useState([]);
     const [clickedAdd, setClickedAdd] = useState(false);
     const [categorySelected, setCategorySelected] = useState("Todos");
     const [loaded, setLoaded] = useState(false);
-    
     // Global states
     const {id: idP, title: titleP, price: priceP, img: imgP, quantity: quantityP} = useSelector(state => state.added);
     const cartArray = useSelector(state => state.cart);
@@ -28,18 +26,16 @@ const Products = () => {
         const getData = async() => {
             try {
                 setLoaded(false);
-
                 let base_url;
-    
+                // Depending on selected category change the url
                 if(categorySelected === "Todos"){
                     base_url = "https://fakestoreapi.com/products";
                 } else {
-                    base_url = `https://fakestoreapi.com/products/category/${categorySelected}`;
+                    base_url = `https://fakestoreapi.com/products/category/${ categorySelected }`;
                 }
                 const response = await fetch(base_url);
                 const result = await response.json();
                 setProductsApi(result);
-
                 setLoaded(true);
             } catch (error) {
                 console.log(error);
@@ -49,21 +45,21 @@ const Products = () => {
         // eslint-disable-next-line
     }, [categorySelected])
 
-    // Button action Add to Cart
+    //  => Button action Add to Cart
     const addToCart = (_id, _title, _price, _img, index) => {
         setClickedAdd(true);
-
         let quantity = 1;
         let indexCurr;
 
+        // Prove if the product is in the cart (other option: cartArray.includes)
         const productExists = cartArray.filter((item, index) => {
             if(item.id === _id){
                 indexCurr = index;
             }
-
             return item.id === _id
         })
 
+        // If the product is not in the cart, it add it to the cart array
         if(productExists.length === 0){
             dispatch(product_added_action(_id, _title, _price, _img, quantity));
         } else {
@@ -74,9 +70,9 @@ const Products = () => {
         dispatch(show_notif_action());
     }
     
+    // When change the values of product added (a new product is added to the cart array)
     useEffect(() => {
         const addProducts = () => {
-
             const productsArray = {
                 id: idP,
                 title: titleP,
@@ -84,7 +80,6 @@ const Products = () => {
                 img: imgP,
                 quantity: quantityP
             }
-
             dispatch(add_to_cart_action(productsArray));
             setClickedAdd(false);
         }
@@ -94,10 +89,9 @@ const Products = () => {
         // eslint-disable-next-line 
     }, [idP, titleP, priceP, imgP])
 
-    //  Button action Show details
+    //  => Button action Show details
     const handleShowDetails = (item) => {
         const {id, title, price, description, category, image} = item;
-
         dispatch(product_detailed_action(id, title, price, description, category, image));
         dispatch(show_modal_action());
     }

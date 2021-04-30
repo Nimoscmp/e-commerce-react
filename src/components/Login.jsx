@@ -1,9 +1,9 @@
-import useStyles from "../styles/Styles"
+// import useStyles from "../styles/Styles"
 
 const Login = () => {
 
-    // Styles
-    const classes = useStyles();
+    //  Styles
+    //  const classes = useStyles();
 
     const handleSubmit = () => {
 
@@ -12,9 +12,10 @@ const Login = () => {
     return (
     <>
         <section>
-            <form action=""
+            <form
             onSubmit={handleSubmit}>
-
+                <label htmlFor="user">Usuario</label>
+                <input type="text" name="user"/>
             </form>
         </section>
     </>
