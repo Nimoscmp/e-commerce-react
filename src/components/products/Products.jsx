@@ -18,9 +18,10 @@ const Products = () => {
     const [clickedAdd, setClickedAdd] = useState(false);
     const [categorySelected, setCategorySelected] = useState("Todos");
     const [loaded, setLoaded] = useState(false);
+    const [prodAlready, setProdAlready] = useState(false);
     
     // Global states
-    const {id: idP, title: titleP, price: priceP, img: imgP} = useSelector(state => state.added);
+    const {id: idP, title: titleP, price: priceP, img: imgP, quantity: quantityP} = useSelector(state => state.added);
     const showNotif = useSelector(state => state.notif);
     const cartArray = useSelector(state => state.cart);
 
@@ -58,10 +59,11 @@ const Products = () => {
 
         const productExists = cartArray.filter(item => item.id === _id)
 
-        if(productExists.length > 0){
-            
-        } else {
+        // cartArray[productExists.id - 1].quantity++;
+        if(productExists.length === 0){
             dispatch(product_added_action(_id, _title, _price, _img, quantity));
+        } else {
+            setProdAlready(true);
         }
 
         dispatch(show_notif_action());
@@ -69,11 +71,13 @@ const Products = () => {
     
     useEffect(() => {
         const addProducts = () => {
+
             const productsArray = {
                 id: idP,
                 title: titleP,
                 price: priceP,
-                img: imgP
+                img: imgP,
+                quantity: quantityP
             }
 
             dispatch(add_to_cart_action(productsArray));

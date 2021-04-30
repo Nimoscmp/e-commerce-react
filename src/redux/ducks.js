@@ -39,8 +39,10 @@ const types = {
     SHOW_MODAL: 'SHOW_MODAL',
     HIDE_MODAL: 'HIDE_MODAL',
     //  Product detailed
-    PRODUCT_DETAILED: 'PRODUCT_DETAILED'
-
+    PRODUCT_DETAILED: 'PRODUCT_DETAILED',
+    // Quantity types
+    QUANTITY_ADD: 'QUANTITY_ADD',
+    QUANTITY_SUBSTRACT: 'QUANTITY_SUBSTRACT'
 }
 
 /*::::::::::::::::::::: 
@@ -85,7 +87,8 @@ export function productAddedReducer(state = productAdded, action) {
                 id: action.payload.id,
                 title: action.payload.title,
                 price: action.payload.price,
-                img: action.payload.img
+                img: action.payload.img,
+                quantity: action.payload.quantity
             }
         default:
             return state;
@@ -130,6 +133,17 @@ export function productDetailedReducer(state = productDetailed, action) {
     }
 }
 
+export function quantityCartReducer(state = {quantity : 1}, action) {
+    switch (action.type) {
+        case types.QUANTITY_ADD:
+            return { quantity : state.quantity + 1 }
+        case types.QUANTITY_SUBSTRACT:
+            return { quantity : state.quantity - 1 }
+        default:
+            return state;
+    }
+}
+
 /*::::::::::::::::::::: 
 :::     Actions     :::
 :::::::::::::::::::::::*/
@@ -160,14 +174,15 @@ export const remove_from_cart_action = (cartFiltered) => async (dispatch) => {
     })
 }
 //  Product added
-export const product_added_action = (_id, _title, _price, _img) => async (dispatch) => {
+export const product_added_action = (_id, _title, _price, _img, _quantity) => async (dispatch) => {
     dispatch({
         type: types.PRODUCT_ADDED,
         payload: {
             id: _id,
             title: _title,
             price: _price,
-            img: _img
+            img: _img,
+            quantity: _quantity
         }
     })
 }
@@ -205,5 +220,16 @@ export const product_detailed_action = (_id, _title, _price, _description, _cate
             category: _category,
             img: _img
         }
+    })
+}
+//  Quantity change
+export const quantity_add_action = () => async (dispatch) => {
+    dispatch({
+        type: types.QUANTITY_ADD
+    })
+}
+export const quantity_subtract_action = () => async (dispatch) => {
+    dispatch({
+        type: types.QUANTITY_SUBSTRACT
     })
 }

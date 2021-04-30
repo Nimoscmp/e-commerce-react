@@ -6,20 +6,31 @@ import { add_to_cart_action, hide_modal_action, product_added_action, show_notif
 import useStyles from "../../styles/Styles"
 
 const Modal = () => {
-
+    //  Styles
     const classes = useStyles();
-
-    const dispatch = useDispatch();   //Local states
+    //  Dispatch
+    const dispatch = useDispatch();   
+    //  Local states
     const [clickedAdd, setClickedAdd] = useState(false);
-    // Global states
+    //  Global states
     const showModal = useSelector(state => state.showModal);
     const { id , title , price , description , category , img} = useSelector(state => state.detailed);
-    const {id: idP, title: titleP, price: priceP, img: imgP} = useSelector(state => state.added);
+    const {id: idP, title: titleP, price: priceP, img: imgP, quantity: quantityP} = useSelector(state => state.added);
+    const cartArray = useSelector(state => state.cart);
 
     // Button action Add to Cart
     const addToCart = (_id, _title, _price, _img) => {
         setClickedAdd(true);
-        dispatch(product_added_action(_id, _title, _price, _img));
+        
+        let quantity = 1;
+
+        const productExists = cartArray.filter(item => item.id === _id)
+
+        // cartArray[productExists.id - 1].quantity++;
+        if(productExists.length === 0){
+            dispatch(product_added_action(_id, _title, _price, _img, quantity));
+        }
+
         dispatch(show_notif_action());
     }
     
@@ -29,7 +40,8 @@ const Modal = () => {
                 id: idP,
                 title: titleP,
                 price: priceP,
-                img: imgP
+                img: imgP,
+                quantity: quantityP
             }
 
             dispatch(add_to_cart_action(productsArray));
@@ -40,6 +52,12 @@ const Modal = () => {
         }
         // eslint-disable-next-line 
     }, [idP, titleP, priceP, imgP])
+
+    //  Add to cart actions
+    const handleAddTocart = (_id_, _title_, _price_, _img_) => {
+        addToCart(_id_, _title_, _price_, _img_);
+        dispatch(hide_modal_action());
+    }
 
     return (
     <>
@@ -74,7 +92,7 @@ const Modal = () => {
             <Button 
                 variant="contained" 
                 className={classes.modalBtnCart}
-                onClick={() => addToCart(id, title, price, img)}>Agregar al carrito</Button>
+                onClick={() => handleAddTocart(id, title, price, img)}>Agregar al carrito</Button>
         </div>
     </Dialog>        
     </>

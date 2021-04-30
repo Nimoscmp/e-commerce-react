@@ -222,6 +222,7 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         justifyContent: 'center',
         marginTop: '6rem',
+        padding: '2rem',
         fontFamily: 'Montserrat'
     },
     cartDiv : {
@@ -320,7 +321,7 @@ const useStyles = makeStyles((theme) => ({
         margin: '0.25rem',
         borderColor: '#7c0362 !important',
         textTransform: 'capitalize !important',
-        fontFamily: 'Montserrat',
+        fontFamily: 'Montserrat !important',
         '&:hover' : {
             backgroundColor: '#7c0362 !important',
             color: '#fff !important'

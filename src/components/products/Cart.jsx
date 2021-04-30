@@ -11,19 +11,29 @@ const Cart = () => {
     const cartArray = useSelector(state => state.cart);
     const dispatch = useDispatch();
 
-    const defCartArray = cartArray.filter(item => item.id !== undefined);
+    // const defCartArray = cartArray.filter(item => item.id !== undefined);
 
     const handleDelete = (id) => {
-        const cartFiltered = defCartArray.filter(item => item.id !== id);
+        const cartFiltered = cartArray.filter(item => item.id !== id);
         dispatch(remove_from_cart_action(cartFiltered));
     }
 
+    const handleSubstract = i => {
+        if(cartArray[i].quantity > 0){
+            --cartArray[i].quantity;
+        }
+    }
+    const handleAdd = i => {
+        ++cartArray[i].quantity;
+    }
+     
+
     return (
     <>
-        {defCartArray.length > 0 ?
+        {cartArray.length > 0 ?
 
         <main className={classes.cartBox}>
-            {defCartArray.map(item => (
+            {cartArray.map((item , index)=> (
             <div 
                 key={item.id}
                 className={classes.cartDiv}>
@@ -37,11 +47,15 @@ const Cart = () => {
                     <span className={classes.cartPrice}><strong>${item.price}</strong></span>
                     <div className={classes.cartMoreLess}>
                         <span className={classes.cartLess}>
-                            <RemoveRounded className={classes.cartAdd}/>
+                            <RemoveRounded 
+                            className={classes.cartAdd}
+                            onClick={() => handleSubstract(index)}/>
                         </span>
-                        <span className={classes.cartNumber}>1</span>
+                        <span className={classes.cartNumber}>{item.quantity}</span>
                         <span className={classes.cartMore}>
-                            <AddRounded className={classes.cartAdd}/>
+                            <AddRounded 
+                            className={classes.cartAdd}
+                            onClick={() => handleAdd(index)}/>
                         </span>
                     </div>
                 </div>
