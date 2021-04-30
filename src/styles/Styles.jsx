@@ -108,14 +108,14 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: '20rem',
         // height: '40rem',
         fontFamily: 'Montserrat, sans-serif',
-        boxShadow: '2px 2px 8px #efefef',
+        boxShadow: '2px 2px 8px #e2e2e2',
         borderRadius: '0.5rem',
         margin: '0.5rem',
         transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
         '&:hover' : {
             transform: 'scale(1.007)',
             transformOrigin: '50% 50%',
-            boxShadow: '3px 3px 15px #e0e0e0'
+            boxShadow: '3px 3px 15px #dcdcdc'
         }
     },
     cardHeader : {
