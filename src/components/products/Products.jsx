@@ -1,6 +1,6 @@
 import useStyles from "../../styles/Styles"
 import { BookmarkRounded, Grade } from '@material-ui/icons';
-import { Button } from "@material-ui/core";
+import { Button, CircularProgress, MenuItem, TextField } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { add_to_cart_action, hide_notif_action, product_added_action, product_detailed_action, show_modal_action, show_notif_action } from "../../redux/ducks";
@@ -16,26 +16,54 @@ const Products = () => {
     //  Local states
     const [productsApi, setProductsApi] = useState([]);
     const [clickedAdd, setClickedAdd] = useState(false);
+    const [categorySelected, setCategorySelected] = useState("Todos");
+    const [loaded, setLoaded] = useState(false);
     
+    // Global states
     const {id: idP, title: titleP, price: priceP, img: imgP} = useSelector(state => state.added);
     const showNotif = useSelector(state => state.notif);
+    const cartArray = useSelector(state => state.cart);
 
     //  Receive data from API
     useEffect(() => {
         const getData = async() => {
-            const base_url = 'https://fakestoreapi.com/products';
-            const response = await fetch(base_url);
-            const result = await response.json();
-            setProductsApi(result);
+            try {
+                setLoaded(false);
+
+                let base_url;
+    
+                if(categorySelected === "Todos"){
+                    base_url = "https://fakestoreapi.com/products";
+                } else {
+                    base_url = `https://fakestoreapi.com/products/category/${categorySelected}`;
+                }
+                const response = await fetch(base_url);
+                const result = await response.json();
+                setProductsApi(result);
+
+                setLoaded(true);
+            } catch (error) {
+                console.log(error);
+            }
         }
         getData();
         // eslint-disable-next-line
-    }, [])
+    }, [categorySelected])
 
     // Button action Add to Cart
     const addToCart = (_id, _title, _price, _img) => {
         setClickedAdd(true);
-        dispatch(product_added_action(_id, _title, _price, _img));
+
+        let quantity = 1;
+
+        const productExists = cartArray.filter(item => item.id === _id)
+
+        if(productExists.length > 0){
+            
+        } else {
+            dispatch(product_added_action(_id, _title, _price, _img, quantity));
+        }
+
         dispatch(show_notif_action());
     }
     
@@ -65,9 +93,44 @@ const Products = () => {
         dispatch(show_modal_action());
     }
 
+    //  Categories
+    const categories = [
+        "Todos",
+        "men's clothing",
+        "women's clothing",
+        "jewelery",
+        "electronics"
+    ];
+    //  When category changes
+    const handleChangeCategory = (e) => {
+        setCategorySelected(e.target.value);
+    }
+
     return (
-    <>
+    <>  
+        <section className={classes.searchBox}>
+            <TextField
+                id="search"
+                select
+                label="Categorías"
+                value={categorySelected}
+                onChange={handleChangeCategory}
+                helperText="Selecciona una categoría"
+                className={classes.searchSelect}
+                // color="secondary"
+                >
+                {categories.map((option) => (
+                    <MenuItem key={option} value={option}>
+                    {option}
+                    </MenuItem>
+                ))}
+            </TextField>
+        </section>
+
+        {loaded?
+        <>
         <main className={classes.productBox}>
+
             {productsApi?.map(item => (
             <div className={classes.card} key={item.id}>
                 <div className={classes.cardHeaderWrap}>
@@ -114,6 +177,14 @@ const Products = () => {
         </main>
         <Notification />
         <Modal />
+        </>
+        :
+        <main className={classes.mainLoad}>
+            <span className={classes.spanLoad}>Cargando...
+                <CircularProgress color="secondary" />
+            </span>
+        </main>
+        }
     </>
     )
 }

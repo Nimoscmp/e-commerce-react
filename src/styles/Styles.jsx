@@ -74,11 +74,27 @@ const useStyles = makeStyles((theme) => ({
     ::: Product styles ::::
     :::::::::::::::::::::::*/
 
+    //Search styles
+    searchBox : {
+        display: 'flex',
+        flexWrap: 'wrap',
+        margin: '6rem 0 0.5rem',
+        padding: '0.5rem 1rem',
+        position: 'relative'
+    },
+    searchSelect : {
+        '& label.Mui-focused': {
+            color: '#c49621'
+        },
+        '& .MuiInput-underline:after': {
+            borderBottomColor: '#c49621'
+        }  
+    },
+
     //Products general
     productBox : {
         display: 'flex',
         flexWrap: 'wrap',
-        marginTop: '6rem',
         padding: '0.5rem',
         position: 'relative'
     },
@@ -152,11 +168,12 @@ const useStyles = makeStyles((theme) => ({
     },
     cardImage: {
         display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        margin: '0.25rem 0'
     },
     cardImg : {
         width: '60%',
-        maxHeight: '280px'
+        maxHeight: '270px'
     },
     cardRate : {
         color: '#e69e10',
@@ -371,14 +388,21 @@ const useStyles = makeStyles((theme) => ({
     },
     modalImg : {
         width: '55%',
-        maxWidth: '280px',
-        maxHeight: '360px'
+        maxWidth: '245px',
+        maxHeight: '315px'
+    },
+    modalCat : {
+        margin: '0.125rem',
+        color: '#777',
+        textAlign: 'center'
     },
     modalDesc : {
         padding: '0.4rem'
     },
     modalParagh : {
-        margin: '0.25rem'
+        padding: '0.25rem',
+        borderRadius: '5px',
+        backgroundColor: '#eee'
     },
     modalPrice : {
         display: 'flex',
@@ -425,6 +449,21 @@ const useStyles = makeStyles((theme) => ({
         '&:hover' : {
             backgroundColor: '#7c0362 !important',
         }
+    },
+
+    /*::::::::::::::::::::: 
+    ::: loading styles  :::
+    :::::::::::::::::::::::*/
+    mainLoad : {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '80vh',
+        width: '100%'
+    },
+    spanLoad : {
+        color: '#e91e63',
+        fontSize: '2rem'
     }
 
 }));
