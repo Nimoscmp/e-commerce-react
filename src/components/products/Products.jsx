@@ -52,7 +52,7 @@ const Products = () => {
     }, [categorySelected])
 
     // Button action Add to Cart
-    const addToCart = (_id, _title, _price, _img) => {
+    const addToCart = (_id, _title, _price, _img, index) => {
         setClickedAdd(true);
 
         let quantity = 1;
@@ -63,7 +63,15 @@ const Products = () => {
         if(productExists.length === 0){
             dispatch(product_added_action(_id, _title, _price, _img, quantity));
         } else {
-            setProdAlready(true);
+            // setProdAlready(true);
+            // const handleAdd = i => {
+                // if(cartArray.length > 0){
+                //     ++cartArray[i].quantity;
+                // }
+                // dispatch(select_products_action());
+                // dispatch(select_cart_action())
+            // }
+            // handleAdd(index);
         }
 
         dispatch(show_notif_action());

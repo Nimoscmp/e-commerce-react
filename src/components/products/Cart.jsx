@@ -1,15 +1,21 @@
 import { Button } from "@material-ui/core";
 import { AddRounded, CloseRounded, RemoveRounded } from "@material-ui/icons";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { remove_from_cart_action } from "../../redux/ducks";
+import { remove_from_cart_action, select_cart_action, select_products_action } from "../../redux/ducks";
 import useStyles from "../../styles/Styles"
 
 const Cart = () => {
 
+    //Styles
     const classes = useStyles();
-
-    const cartArray = useSelector(state => state.cart);
+    //Dispatch
     const dispatch = useDispatch();
+    //Global states
+    const cartArray = useSelector(state => state.cart);
+    const { products: productsTab } = useSelector(state => state.style);
+    //Local state
+    const [totalPrice, setTotalPrice] = useState(0);
 
     // const defCartArray = cartArray.filter(item => item.id !== undefined);
 
@@ -19,14 +25,49 @@ const Cart = () => {
     }
 
     const handleSubstract = i => {
-        if(cartArray[i].quantity > 0){
+        if(cartArray[i].quantity > 1){
             --cartArray[i].quantity;
         }
+        dispatch(select_products_action());
+        dispatch(select_cart_action());
+        totalPriceCalc();
+        
     }
     const handleAdd = i => {
         ++cartArray[i].quantity;
+        dispatch(select_products_action());
+        dispatch(select_cart_action());
+        totalPriceCalc();
     }
-     
+
+    // Total price
+    const totalPriceCalc = () => {
+
+        var sum = []
+        var total = 0;
+
+        if(cartArray.length > 0){
+
+            cartArray.map((item , index) => {
+                const mult = item.quantity * item.price;
+                sum[index] = mult;
+                return true;
+            })
+
+            sum.forEach(i => {
+                total += i;
+            });
+
+            setTotalPrice(total);
+        }
+    }
+
+    useEffect(() => {
+        totalPriceCalc();
+    }, [])
+    useEffect(() => {
+        totalPriceCalc();
+    }, [cartArray])
 
     return (
     <>
@@ -66,7 +107,9 @@ const Cart = () => {
             </div>       
             ))}
             
-            <Button variant="outlined" className={classes.cartPay}>Pagar total</Button>
+            <Button variant="outlined" className={classes.cartPay}>Pagar total: <strong className={classes.cartTotalPrice}> 
+                ${totalPrice.toFixed(2)} 
+            </strong></Button>
         </main>
 
         :

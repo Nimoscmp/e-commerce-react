@@ -327,6 +327,9 @@ const useStyles = makeStyles((theme) => ({
             color: '#fff !important'
         }
     },
+    cartTotalPrice : {
+        margin: '0 1rem'
+    },
 
     /*::::::::::::::::::::: 
     ::Notification styles::
