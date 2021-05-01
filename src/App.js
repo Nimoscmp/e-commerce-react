@@ -15,7 +15,7 @@ function App() {
         store={store}>
 
         <Router>
-
+        {/* //Navigation provisory */}
           <nav style={{marginTop: '6rem'}}>
             <ul>
               <li>
