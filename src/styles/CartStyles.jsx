@@ -123,7 +123,12 @@ const CartStyles = makeStyles((theme) => ({
     cartAdd : {
         color: '#fff',
         margin : '0',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        opacity: '0.75',
+        transition: 'all 0.3s ease-in-out',
+        '&:hover' : {
+            opacity: '1'
+        }
     },
     cartPay : {
         width: '60%',
