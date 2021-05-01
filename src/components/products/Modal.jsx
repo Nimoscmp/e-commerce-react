@@ -2,7 +2,7 @@ import { Button, Dialog } from "@material-ui/core"
 import { CloseRounded } from "@material-ui/icons"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { add_to_cart_action, hide_modal_action, product_added_action, show_notif_action } from "../../redux/ducks"
+import { add_to_cart_action, hide_modal_action, product_added_action, select_cart_action, select_products_action, show_notif_action } from "../../redux/ducks"
 import useStyles from "../../styles/Styles"
 
 const Modal = () => {
@@ -21,7 +21,6 @@ const Modal = () => {
     // Button action Add to Cart
     const addToCart = (_id, _title, _price, _img) => {
         setClickedAdd(true);
-        
         let quantity = 1;
         let indexCurr;
 
@@ -29,7 +28,6 @@ const Modal = () => {
             if(item.id === _id){
                 indexCurr = index;
             }
-
             return item.id === _id
         })
 
@@ -38,7 +36,6 @@ const Modal = () => {
         } else {
             ++cartArray[indexCurr].quantity;
         }
-        // setClickedAdd(false);
         
         dispatch(show_notif_action());
     }
@@ -66,6 +63,10 @@ const Modal = () => {
     const handleAddTocart = (_id_, _title_, _price_, _img_) => {
         addToCart(_id_, _title_, _price_, _img_);
         dispatch(hide_modal_action());
+        dispatch(select_cart_action());
+        dispatch(select_products_action());
+        dispatch(select_cart_action());
+        dispatch(select_products_action());
     }
 
     return (

@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     :::: Header styles ::::
     :::::::::::::::::::::::*/
 
+    //Header desktop
     //Header 
     headerViolet : {
         position: 'fixed',
@@ -37,23 +38,28 @@ const useStyles = makeStyles((theme) => ({
     //List
     dFlexCenter : {
         display: 'flex',
-        justifyContent: 'around',
+        justifyContent: 'space-around',
         alignItems: 'end',
+        margin: '1.25rem 0.5rem 0.25rem',
         listStyleType: 'none',
-        color: '#ccc'
+        color: '#ccc',
+        fontFamily: 'Montserrat !important'
     },
     //List item
     marginTwo : {
-        margin: '2.25rem 1.75rem 0.25rem !important',
+        margin: '1rem 1.75rem 0 !important',
         padding: '0',
         cursor: 'pointer',
-        transition: 'all 0.3s ease-out'
+        transition: 'all 0.3s ease-out',
+        '&:hover' : {
+            color: '#fff !important'
+        }
     },
     //Mobile bar
     bar : {
-        width: '5rem',
+        width: '6rem',
         height: '1px',
-        marginStart: '1.45rem',
+        marginStart: '4.35rem',
         backgroundColor: '#fff',
         transition: 'all 0.3s ease-out'
     },
@@ -68,6 +74,40 @@ const useStyles = makeStyles((theme) => ({
     //Strong
     blue : {
         color: '#072b8f'
+    },
+
+    //Header mobile
+    headerMini : {
+        position: 'fixed',
+        top: '0',
+        zIndex: '1000',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '5rem',
+        padding: '0.25rem 0',
+        backgroundColor: '#7c0362',
+        boxShadow: '2px 2px 6px #dedede'
+    },
+    navMini : {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%',
+        padding: '0.25rem 0.5rem'
+    },
+    headerMenu : {
+        color: '#fff !important',
+        cursor: 'pointer !important'
+    },
+    headerMenuItem : {
+        fontFamily: 'Montserrat !important'
+    },
+    headerTitle : {
+        fontFamily: 'Montserrat !important',
+        fontWeight: '400',
+        color: '#fff'
     },
 
     /*::::::::::::::::::::: 
@@ -88,7 +128,11 @@ const useStyles = makeStyles((theme) => ({
         },
         '& .MuiInput-underline:after': {
             borderBottomColor: '#c49621'
-        }  
+        },
+        fontFamily: 'Montserrat !important' 
+    },
+    searchMenuItem : {
+        fontFamily: 'Montserrat !important'
     },
 
     //Products general
@@ -466,12 +510,18 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '80vh',
+        height: '70vh',
         width: '100%'
     },
     spanLoad : {
-        color: '#e91e63',
-        fontSize: '2rem'
+        // color: '#e91e63',
+        color: '#7c0362',
+        fontSize: '1.5rem',
+        margin: '0.125rem'
+    },
+    progressLoad : {
+        color: '#7c0362 !important',
+        margin: '0.125rem'
     }
 
 }));

@@ -65,8 +65,7 @@ const Products = () => {
         } else {
             ++cartArray[indexCurr].quantity;
         }
-        // setClickedAdd(false);
-
+        
         dispatch(show_notif_action());
     }
     
@@ -123,7 +122,7 @@ const Products = () => {
                 // color="secondary"
                 >
                 {categories.map((option) => (
-                    <MenuItem key={option} value={option}>
+                    <MenuItem key={option} value={option} className={classes.searchMenuItem}>
                     {option}
                     </MenuItem>
                 ))}
@@ -173,7 +172,8 @@ const Products = () => {
                     <Button 
                         variant="contained" 
                         className={classes.cardBtnCart}
-                        onClick={() => addToCart(item.id, item.title, item.price, item.image)}>Agregar al carrito</Button>
+                        onClick={() => addToCart(item.id, item.title, item.price, item.image)}>Agregar al carrito
+                    </Button>
                 </div>
             </div>
             ))}
@@ -183,9 +183,8 @@ const Products = () => {
         </>
         :
         <main className={classes.mainLoad}>
-            <span className={classes.spanLoad}>Cargando...
-                <CircularProgress color="secondary" />
-            </span>
+            <span className={classes.spanLoad}>Cargando...</span>
+            <CircularProgress className={classes.progressLoad} size={30}/>
         </main>
         }
     </>
