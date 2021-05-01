@@ -1,6 +1,6 @@
 import useStyles from "../../styles/Styles"
 import { BookmarkRounded, Grade } from '@material-ui/icons';
-import { Button, CircularProgress, Grid, MenuItem, TextField, useMediaQuery } from "@material-ui/core";
+import { Button, CircularProgress, MenuItem, TextField, useMediaQuery } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { add_to_cart_action, product_added_action, product_detailed_action, show_modal_action, show_notif_action } from "../../redux/ducks";

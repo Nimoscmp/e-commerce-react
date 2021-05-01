@@ -511,7 +511,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '0 0.3rem 0.3rem'
     },
     modalBtnClose : {
-        width: '80%',
+        width: '100%',
         margin: '0.125rem !important',
         height: '2.25rem !important',
         fontFamily: 'Montserrat !important',
@@ -523,7 +523,7 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     modalBtnCart : {
-        width: '80%',
+        width: '100%',
         height: '2.25rem !important',
         margin: '0.125rem !important',
         fontFamily: 'Montserrat !important',

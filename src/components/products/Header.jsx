@@ -1,6 +1,6 @@
 import useStyles from "../../styles/Styles";
 import { select_cart_action, select_products_action } from "../../redux/ducks";
-import { Button, Fade, Menu, MenuItem, useMediaQuery } from "@material-ui/core";
+import { Fade, Menu, MenuItem, useMediaQuery } from "@material-ui/core";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";

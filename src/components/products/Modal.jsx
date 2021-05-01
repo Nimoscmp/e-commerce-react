@@ -1,4 +1,4 @@
-import { Button, Dialog } from "@material-ui/core"
+import { Button, Dialog, useMediaQuery } from "@material-ui/core"
 import { CloseRounded } from "@material-ui/icons"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -8,6 +8,7 @@ import useStyles from "../../styles/Styles"
 const Modal = () => {
     //  Styles
     const classes = useStyles();
+    const matches_576 = useMediaQuery('(min-width:576px)');
     //  Dispatch
     const dispatch = useDispatch();   
     //  Local states
@@ -94,7 +95,9 @@ const Modal = () => {
             <span className={classes.modalPricePrev}><del>${Math.round(price * 1.2)}</del></span>
             <span className={classes.modalPriceCurr}><strong>${price}</strong></span>
         </div>
-        <div className={classes.modalButtons}>
+        <div 
+            className={classes.modalButtons}
+            style={{flexDirection: matches_576 ? 'row' : 'column-reverse'}}>
             <Button 
                 variant="outlined" 
                 className={classes.modalBtnClose}
