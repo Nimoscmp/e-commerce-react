@@ -3,11 +3,12 @@ import { CloseRounded } from "@material-ui/icons"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { add_to_cart_action, hide_modal_action, product_added_action, select_cart_action, select_products_action, show_notif_action } from "../../redux/ducks"
-import useStyles from "../../styles/Styles"
+import ModalStyles from "../../styles/ModalStyles"
+// import useStyles from "../../styles/Styles"
 
 const Modal = () => {
     //  Styles
-    const classes = useStyles();
+    const classes = ModalStyles();
     const matches_576 = useMediaQuery('(min-width:576px)');
     //  Dispatch
     const dispatch = useDispatch();   

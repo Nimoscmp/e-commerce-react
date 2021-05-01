@@ -1,4 +1,5 @@
-import useStyles from "../../styles/Styles"
+// import useStyles from "../../styles/Styles"
+import ProductStyles from "../../styles/ProductStyles";
 import { BookmarkRounded, Grade } from '@material-ui/icons';
 import { Button, CircularProgress, MenuItem, TextField, useMediaQuery } from "@material-ui/core";
 import { useEffect, useState } from "react";
@@ -9,7 +10,7 @@ import Modal from "./Modal";
 
 const Products = () => {
     //  Styles
-    const classes = useStyles();
+    const classes = ProductStyles();
     const matches_576 = useMediaQuery('(min-width:576px)');
     //  Dispatch
     const dispatch = useDispatch();

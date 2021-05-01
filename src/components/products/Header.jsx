@@ -1,4 +1,5 @@
-import useStyles from "../../styles/Styles";
+// import useStyles from "../../styles/Styles";
+import HeaderStyles from "../../styles/HeaderStyles";
 import { select_cart_action, select_products_action } from "../../redux/ducks";
 import { Fade, Menu, MenuItem, useMediaQuery } from "@material-ui/core";
 //redux
@@ -8,7 +9,7 @@ import { ArrowBackRounded, MenuRounded, ShoppingCartOutlined } from "@material-u
 
 const Header = () => {
     //  Styles
-    const classes = useStyles();
+    const classes = HeaderStyles();
     const matches_720 = useMediaQuery('(min-width:720px)');
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);

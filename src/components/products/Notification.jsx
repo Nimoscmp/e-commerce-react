@@ -1,4 +1,5 @@
-import useStyles from "../../styles/Styles"
+// import useStyles from "../../styles/Styles"
+import NotifStyles from "../../styles/NotifStyles";
 import { useMediaQuery } from "@material-ui/core";
 import { DoneRounded } from "@material-ui/icons";
 import { useEffect } from "react";
@@ -7,7 +8,7 @@ import { hide_notif_action } from "../../redux/ducks";
 
 const Notification = () => {
     //  Styles
-    const classes = useStyles();
+    const classes = NotifStyles();
     const matches_880 = useMediaQuery('(min-width:880px)');
     const matches_576 = useMediaQuery('(min-width:576px)');
     //  Global states

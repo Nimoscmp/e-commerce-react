@@ -3,12 +3,13 @@ import { AddRounded, CloseRounded, RemoveRounded } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { product_removed_action, remove_from_cart_action, select_cart_action, select_products_action } from "../../redux/ducks";
-import useStyles from "../../styles/Styles"
+import CartStyles from "../../styles/CartStyles";
+// import useStyles from "../../styles/Styles"
 
 const Cart = () => {
 
     //Styles
-    const classes = useStyles();
+    const classes = CartStyles();
     const matches_524 = useMediaQuery('(min-width:524px)');
     const matches_720 = useMediaQuery('(min-width:720px)');
     const matches_1240 = useMediaQuery('(min-width:1240px)');
