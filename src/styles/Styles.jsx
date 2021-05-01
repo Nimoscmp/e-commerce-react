@@ -125,12 +125,14 @@ const useStyles = makeStyles((theme) => ({
     },
     searchSelect : {
         '& label.Mui-focused': {
-            color: '#c49621'
+            color: '#c49621' 
         },
         '& .MuiInput-underline:after': {
             borderBottomColor: '#c49621'
         },
-        fontFamily: 'Montserrat !important' 
+        '& .MuiSelect-root , .MuiFormHelperText-root, label, select': {
+            fontFamily: 'Montserrat !important'
+        }
     },
     searchMenuItem : {
         fontFamily: 'Montserrat !important'
@@ -218,6 +220,10 @@ const useStyles = makeStyles((theme) => ({
     },
     cardImg : {
         width: '60%',
+        maxHeight: '270px'
+    },
+    cardImgMini : {
+        width: '37%',
         maxHeight: '270px'
     },
     cardRate : {

@@ -1,6 +1,6 @@
 import useStyles from "../../styles/Styles"
 import { BookmarkRounded, Grade } from '@material-ui/icons';
-import { Button, CircularProgress, MenuItem, TextField } from "@material-ui/core";
+import { Button, CircularProgress, Grid, MenuItem, TextField, useMediaQuery } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { add_to_cart_action, product_added_action, product_detailed_action, show_modal_action, show_notif_action } from "../../redux/ducks";
@@ -10,6 +10,7 @@ import Modal from "./Modal";
 const Products = () => {
     //  Styles
     const classes = useStyles();
+    const matches_576 = useMediaQuery('(min-width:576px)');
     //  Dispatch
     const dispatch = useDispatch();
     //  Local states
@@ -131,53 +132,60 @@ const Products = () => {
 
         {loaded?
         <>
-        <main className={classes.productBox}>
-
-            {productsApi?.map(item => (
-            <div className={classes.card} key={item.id}>
-                <div className={classes.cardHeaderWrap}>
-                    <div className={classes.cardHeader}>
-                        <h3 className={classes.cardTitle}>
-                            {item.title.length > 40 ? `${item.title.slice(0, 40)}...` : item.title}
-                        </h3>
-                        <BookmarkRounded className={classes.cardFav} fontSize="large"/>
+            <main 
+                className={classes.productBox}
+                style={{justifyContent: matches_576 ? 'flex-start' : 'center'}}>
+                
+                {productsApi?.map(item => (
+                
+                <div 
+                    className={classes.card} 
+                    key={item.id}
+                    style={{height: matches_576 ? 'auto' : '28rem'}}>
+                    <div className={classes.cardHeaderWrap}>
+                        <div className={classes.cardHeader}>
+                            <h3 className={classes.cardTitle}>
+                                {item.title.length > 40 ? `${item.title.slice(0, 40)}...` : item.title}
+                            </h3>
+                            <BookmarkRounded className={classes.cardFav} fontSize="large"/>
+                        </div>
+                    </div>
+                    <div className={classes.cardPrice}>
+                        <span className={classes.cardPricePrev}><small>Categoría</small></span>
+                        <span>{item.category}</span>
+                    </div>
+                    <div className={classes.cardPrice}>
+                        <span className={classes.cardPricePrev}><small><del>${Math.round(item.price * 1.2)}</del></small></span>
+                        <span className={classes.cardPriceCurr}><strong>${item.price}</strong></span>
+                    </div>
+                    <div className={classes.cardImage}>
+                        <img 
+                            src={item.image} 
+                            alt={item.title}
+                            className={matches_576 ? classes.cardImg : classes.cardImgMini}/>
+                    </div>
+                    <div className={classes.cardPrice}>
+                        <Grade className={classes.cardRate}/>
+                        <Grade className={classes.cardRate}/>
+                        <Grade className={classes.cardRate}/>
+                        <Grade className={classes.cardRate}/>
+                        <Grade className={classes.cardRate}/>
+                    </div>
+                    <div className={classes.cardButtons}>
+                        <Button 
+                            variant="outlined" 
+                            className={classes.cardBtnDetail}
+                            onClick={() => handleShowDetails(item)}>Ver detalles</Button>
+                        <Button 
+                            variant="contained" 
+                            className={classes.cardBtnCart}
+                            onClick={() => addToCart(item.id, item.title, item.price, item.image)}>Agregar al carrito
+                        </Button>
                     </div>
                 </div>
-                <div className={classes.cardPrice}>
-                    <span className={classes.cardPricePrev}><small>Categoría</small></span>
-                    <span>{item.category}</span>
-                </div>
-                <div className={classes.cardPrice}>
-                    <span className={classes.cardPricePrev}><small><del>${Math.round(item.price * 1.2)}</del></small></span>
-                    <span className={classes.cardPriceCurr}><strong>${item.price}</strong></span>
-                </div>
-                <div className={classes.cardImage}>
-                    <img 
-                        src={item.image} 
-                        alt={item.title}
-                        className={classes.cardImg}/>
-                </div>
-                <div className={classes.cardPrice}>
-                    <Grade className={classes.cardRate}/>
-                    <Grade className={classes.cardRate}/>
-                    <Grade className={classes.cardRate}/>
-                    <Grade className={classes.cardRate}/>
-                    <Grade className={classes.cardRate}/>
-                </div>
-                <div className={classes.cardButtons}>
-                    <Button 
-                        variant="outlined" 
-                        className={classes.cardBtnDetail}
-                        onClick={() => handleShowDetails(item)}>Ver detalles</Button>
-                    <Button 
-                        variant="contained" 
-                        className={classes.cardBtnCart}
-                        onClick={() => addToCart(item.id, item.title, item.price, item.image)}>Agregar al carrito
-                    </Button>
-                </div>
-            </div>
-            ))}
-        </main>
+                ))}
+            </main>
+
         <Notification />
         <Modal />
         </>
