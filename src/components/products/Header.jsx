@@ -9,7 +9,7 @@ import { ArrowBackRounded, MenuRounded, ShoppingCartOutlined } from "@material-u
 const Header = () => {
     //  Styles
     const classes = useStyles();
-    const matches_524 = useMediaQuery('(min-width:524px)');
+    const matches_720 = useMediaQuery('(min-width:720px)');
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
@@ -41,7 +41,7 @@ const Header = () => {
 
     return (
         <>
-        {matches_524 ?
+        {matches_720 ?
         <header className={classes.headerViolet}>
             <nav className={classes.w40}>
                 <ul className={classes.dFlexCenter}>

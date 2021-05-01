@@ -106,6 +106,7 @@ const useStyles = makeStyles((theme) => ({
     },
     headerTitle : {
         fontFamily: 'Montserrat !important',
+        fontSize: '1.3rem',
         fontWeight: '400',
         color: '#fff'
     },
@@ -266,7 +267,7 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         justifyContent: 'center',
         marginTop: '6rem',
-        padding: '2rem',
+        padding: '1rem',
         fontFamily: 'Montserrat'
     },
     cartDiv : {
@@ -314,8 +315,30 @@ const useStyles = makeStyles((theme) => ({
         width: '30%',
         padding: '0.5rem'
     },
+    cartImageMini : {
+        position: 'absolute',
+        bottom: '0.5rem',
+        right: '0.5rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '40%',
+        padding: '0'
+    },
+    cartImgBig : {
+        width: '50%',
+        maxHeight: '180px',
+        maxWidth: '140px'
+    },
     cartImg : {
-        width: '60%'
+        width: '60%',
+        maxHeight: '180px',
+        maxWidth: '140px'
+    },
+    cartImgMini : {
+        width: '80%',
+        maxWidth: '100px',
+        maxHeight: '140px'
     },
     cartMoreLess : {
         display: 'flex',
@@ -360,7 +383,7 @@ const useStyles = makeStyles((theme) => ({
         cursor: 'pointer'
     },
     cartPay : {
-        width: '60% !important',
+        width: '60%',
         color: '#7c0362 !important',
         margin: '0.25rem',
         borderColor: '#7c0362 !important',
@@ -373,6 +396,9 @@ const useStyles = makeStyles((theme) => ({
     },
     cartTotalPrice : {
         margin: '0 1rem'
+    },
+    cartEmpty : {
+        padding: '0.25rem'
     },
 
     /*::::::::::::::::::::: 
