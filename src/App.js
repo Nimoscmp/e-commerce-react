@@ -1,9 +1,9 @@
 import { Provider } from "react-redux";
-// import { BrowserRouter as Router, Link, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Redirect, Route, Switch } from 'react-router-dom';
 import generateStore from "./redux/store";
-// import Login from "./components/Login";
+import Login from "./components/Login";
 import Main from "./components/Main";
-// import Reset from "./components/Reset";
+import Reset from "./components/Reset";
 
 function App() {
 
@@ -14,9 +14,9 @@ function App() {
       <Provider
         store={store}>
 
-        {/* <Router> */}
+        <Router>
 
-          {/* <nav style={{marginTop: '6rem'}}>
+          <nav style={{marginTop: '6rem'}}>
             <ul>
               <li>
                 <Link to="/login">Login</Link>
@@ -28,30 +28,30 @@ function App() {
                 <Link to="/reset">Reset</Link>
               </li>
             </ul>
-          </nav> */}
+          </nav>
 
-          {/* <Switch>
+          <Switch>
 
             <Redirect exact from="/" to="/login"/>
 
             {/* Login route */}
-            {/* <Route path="/login">
+            <Route path="/login">
               <Login/>
-            </Route> */}
+            </Route>
             {/* Home route  */}
-            {/* <Route path="/home">
+            <Route path="/home">
               <Main/>
-            </Route> */}
+            </Route>
             {/* Reset route  */}
-            {/* <Route path="/reset">
+            <Route path="/reset">
               <Reset/>
-            </Route>  */}
+            </Route> 
 
-          {/* </Switch> */}
+          </Switch>
 
           <Main />
 
-        {/* </Router> */}
+        </Router>
       </Provider>
     </>
   );
