@@ -1,11 +1,25 @@
-// import useStyles from "../styles/Styles"
+/*::::::::::::::::::::: 
+::::  Dependencies ::::
+:::::::::::::::::::::::*/
+
+//  React
+import { useEffect, useState } from "react";
+//  Redux
+import { useDispatch, useSelector } from "react-redux";
+import { set_auth_error_msg_action, update_state_user_action } from "../../redux/ducks";
+//  Router
+import { useHistory } from "react-router";
+//  Firebase
 import { FirebaseAuthConsumer } from "@react-firebase/auth";
 import "firebase/auth";
-import { useDispatch, useSelector } from "react-redux";
-import { set_auth_error_msg_action, update_state_user_action } from "../redux/ducks";
-import { useEffect, useState } from "react";
-import { useHistory } from "react-router";
-import { emailAndPasswordLogin, facebookLogIn, googleLogIn, logOut } from "../helpers/authMethods";
+import { emailAndPasswordLogin, facebookLogIn, googleLogIn, logOut } from "../../helpers/authMethods";
+//  Styles
+// import useStyles from "../styles/Styles"
+
+
+/*::::::::::::::::::::: 
+:::::  Component  :::::
+:::::::::::::::::::::::*/
 
 const Login = () => {
     //  Dispatch
@@ -35,6 +49,7 @@ const Login = () => {
         dispatch(set_auth_error_msg_action(responseMsg));
     }
 
+    //  Error messages
     useEffect(() => {
         if(fbAuthError !== null){
             switch (fbAuthError) {

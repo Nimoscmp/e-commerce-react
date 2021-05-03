@@ -1,13 +1,21 @@
-import { Provider, useSelector } from "react-redux";
-import { BrowserRouter as Router, Link, Redirect, Route, Switch } from 'react-router-dom';
-import generateStore from "./redux/store";
+/*::::::::::::::::::::: 
+::::  Dependencies ::::
+:::::::::::::::::::::::*/
+
+//  React
 import { useEffect, useState } from "react";
-import Login from "./components/Login";
-import Main from "./components/Main";
-import Reset from "./components/Reset";
+//  Redux
+import { Provider, useSelector } from "react-redux";
+import generateStore from "./redux/store";
+//  Router
+import { BrowserRouter as Router, Link, Redirect, Route, Switch } from 'react-router-dom';
+//  Firebase
 import fbConfig from "./services/firebase/fbConfig";
 import firebase from "firebase/app";
 import { FirebaseAuthProvider } from "@react-firebase/auth";
+//  Components
+import Main from "./components/Main";
+import Landing from "./components/Landing";
 // import { auth } from "./services/firebase/firebase";
 // import {
 //   FirebaseAuthProvider,
@@ -19,24 +27,13 @@ import { FirebaseAuthProvider } from "@react-firebase/auth";
 // import firebase from "firebase/app";
 // import "firebase/auth";
 
+/*::::::::::::::::::::: 
+:::::  Component  :::::
+:::::::::::::::::::::::*/
+
 function App() {
 
   const store = generateStore();
-
-  // window.addEventListener('unload', event => {
-    
-  //   event.preventDefault()
-  //   // Chrome requires returnValue to be set.
-  //   // event.returnValue = '';
-
-  //   return (
-  //     <>
-  //       <Redirect exact from="/login" to="/"/>
-  //       <Redirect exact from="/home" to="/"/>
-  //     </>
-  //   )
-    
-  // })
 
   return (
     <>
@@ -66,16 +63,12 @@ function App() {
 
             {/* Login route */}
             <Route path="/login">
-              <Login/>
+              <Landing/>
             </Route>
             {/* Home route  */}
             <Route path="/home">
               <Main/>
             </Route>
-            {/* Reset route  */}
-            <Route path="/reset">
-              <Reset/>
-            </Route> 
             
             <Redirect to="/"/> 
 
