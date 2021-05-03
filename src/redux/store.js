@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 //Ducks
-import { cartReducer, firebaseUserReducer, notifReducer, productAddedReducer, productDetailedReducer, showModalReducer, stylesHeader } from './ducks';
+import { cartReducer, firebaseAuthErrorReducer, firebaseUserReducer, notifReducer, productAddedReducer, productDetailedReducer, showModalReducer, stylesHeader } from './ducks';
 
 
 
@@ -15,7 +15,8 @@ const rootReducer = combineReducers({
     showModal: showModalReducer,
     detailed: productDetailedReducer,
     //Firebase
-    fbUser: firebaseUserReducer
+    fbUser: firebaseUserReducer,
+    fbAuthError: firebaseAuthErrorReducer
 })
 
 //Store data in redux devtools extension
