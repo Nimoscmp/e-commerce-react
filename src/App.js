@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import Login from "./components/Login";
 import Main from "./components/Main";
 import Reset from "./components/Reset";
+import fbConfig from "./services/firebase/fbConfig";
+import firebase from "firebase/app";
+import { FirebaseAuthProvider } from "@react-firebase/auth";
 // import { auth } from "./services/firebase/firebase";
 // import {
 //   FirebaseAuthProvider,
@@ -15,8 +18,6 @@ import Reset from "./components/Reset";
 // import fbConfig from "./services/firebase/fbConfig";
 // import firebase from "firebase/app";
 // import "firebase/auth";
-
-
 
 function App() {
 
@@ -37,51 +38,9 @@ function App() {
 
   return (
     <>
+    <FirebaseAuthProvider {...fbConfig} firebase={firebase}>
       <Provider
         store={store}>
-
-        {/* <button
-          onClick={() => {
-            const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithPopup(googleAuthProvider);
-          }}
-        >
-          Sign In with Google
-        </button>
-
-        <button
-          onClick={() => {
-            const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
-            firebase.auth().signInWithPopup(facebookAuthProvider).then(function(result) {
-              // This gives you a Facebook Access Token.
-              var token = result.credential.accessToken;
-              // The signed-in user info.
-              var user = result.user;
-            });
-          }}
-        >
-          Sign In with Facebook
-        </button>
-
-        <button
-          onClick={() => {
-            firebase.auth().signOut();
-          }}
-        >
-          Sign Out
-        </button>
-
-        <FirebaseAuthConsumer>
-          {({ isSignedIn, user, providerId }) => {
-            console.log(isSignedIn);
-            return (
-              <pre style={{ height: 300, overflow: "auto" }}>
-                {JSON.stringify({ isSignedIn, user, providerId }, null, 2)}
-              </pre>
-            );
-          }}
-        </FirebaseAuthConsumer> */}
-
 
         <Router>
         {/* //Navigation provisory */}
@@ -118,10 +77,9 @@ function App() {
 
           </Switch>
 
-
-
         </Router>
       </Provider>
+    </FirebaseAuthProvider>
     </>
   );
 }
