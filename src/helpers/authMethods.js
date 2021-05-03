@@ -1,6 +1,19 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 
+export const registerNewUser = async(email, password) => {
+    let errorCode = null;
+
+    try {
+        await firebase.auth().createUserWithEmailAndPassword(email, password);
+    } catch (error) {
+        console.log(error);
+        errorCode = error.code;
+    }
+
+    return errorCode;
+}
+
 export const emailAndPasswordLogin = async(email , password) => {
     let errorCode = null;
 

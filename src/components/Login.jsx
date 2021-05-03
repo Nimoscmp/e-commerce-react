@@ -79,7 +79,7 @@ const Login = () => {
     return (
     <>  
     <section>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">Ingrese Email</label>
         <input 
             type="email"
             name="email"

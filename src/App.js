@@ -23,18 +23,20 @@ function App() {
 
   const store = generateStore();
 
-  // const [firebaseUser, setFirebaseUser] = useState(null);
+  // window.addEventListener('unload', event => {
+    
+  //   event.preventDefault()
+  //   // Chrome requires returnValue to be set.
+  //   // event.returnValue = '';
 
-  // useEffect(() => {
-  //   auth.onAuthStateChanged(user =>{
-  //     console.log(user)
-  //     if(user){
-  //       setFirebaseUser(user)
-  //     } else{
-  //       setFirebaseUser(null)
-  //     }
-  //   })
-  // }, [])
+  //   return (
+  //     <>
+  //       <Redirect exact from="/login" to="/"/>
+  //       <Redirect exact from="/home" to="/"/>
+  //     </>
+  //   )
+    
+  // })
 
   return (
     <>
@@ -74,6 +76,8 @@ function App() {
             <Route path="/reset">
               <Reset/>
             </Route> 
+            
+            <Redirect to="/"/> 
 
           </Switch>
 
