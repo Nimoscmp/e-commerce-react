@@ -1,4 +1,4 @@
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { BrowserRouter as Router, Link, Redirect, Route, Switch } from 'react-router-dom';
 import generateStore from "./redux/store";
 import { useEffect, useState } from "react";
@@ -6,15 +6,15 @@ import Login from "./components/Login";
 import Main from "./components/Main";
 import Reset from "./components/Reset";
 // import { auth } from "./services/firebase/firebase";
-import {
-  FirebaseAuthProvider,
-  FirebaseAuthConsumer,
-  IfFirebaseAuthed,
-  IfFirebaseAuthedAnd
-} from "@react-firebase/auth";
-import fbConfig from "./services/firebase/fbConfig";
-import firebase from "firebase/app";
-import "firebase/auth";
+// import {
+//   FirebaseAuthProvider,
+//   FirebaseAuthConsumer,
+//   IfFirebaseAuthed,
+//   IfFirebaseAuthedAnd
+// } from "@react-firebase/auth";
+// import fbConfig from "./services/firebase/fbConfig";
+// import firebase from "firebase/app";
+// import "firebase/auth";
 
 
 
@@ -37,12 +37,10 @@ function App() {
 
   return (
     <>
-    <FirebaseAuthProvider {...fbConfig} firebase={firebase}>
-
       <Provider
         store={store}>
 
-        <button
+        {/* <button
           onClick={() => {
             const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithPopup(googleAuthProvider);
@@ -82,11 +80,12 @@ function App() {
               </pre>
             );
           }}
-        </FirebaseAuthConsumer>
+        </FirebaseAuthConsumer> */}
+
 
         <Router>
         {/* //Navigation provisory */}
-          <nav style={{marginTop: '6rem'}}>
+          {/* <nav style={{marginTop: '6rem'}}>
             <ul>
               <li>
                 <Link to="/login">Login</Link>
@@ -98,7 +97,7 @@ function App() {
                 <Link to="/reset">Reset</Link>
               </li>
             </ul>
-          </nav>
+          </nav> */}
 
           <Switch>
 
@@ -123,7 +122,6 @@ function App() {
 
         </Router>
       </Provider>
-    </FirebaseAuthProvider>
     </>
   );
 }
