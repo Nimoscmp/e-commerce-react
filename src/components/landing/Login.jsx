@@ -13,6 +13,7 @@ import { useHistory } from "react-router";
 import { FirebaseAuthConsumer } from "@react-firebase/auth";
 import "firebase/auth";
 import { emailAndPasswordLogin, facebookLogIn, googleLogIn, logOut } from "../../helpers/authMethods";
+import Form from "./Form";
 //  Styles
 // import useStyles from "../styles/Styles"
 
@@ -32,7 +33,9 @@ const Login = () => {
         email: '',
         password: ''
     })
-    const [errorToShow, setErrorToShow] = useState('');
+    const [errorEmail, setErrorEmail] = useState('');
+    const [errorPassword, setErrorPassword] = useState('');
+    const [errorGeneral, setErrorGeneral] = useState('');
 
     //  Save username and password when writing
     const handleChange = e => {
@@ -53,26 +56,28 @@ const Login = () => {
     useEffect(() => {
         if(fbAuthError !== null){
             switch (fbAuthError) {
-                case 'auth/wrong-password':
-                    setErrorToShow('La contraseña es inválida');
-                    break;
                 case 'auth/user-not-found':
-                    setErrorToShow('El email no es correcto');
+                    setErrorEmail('El email no es correcto');
                     break;
                 case 'auth/invalid-email':
-                    setErrorToShow('No es un formato de email válido');
-                    break;
-                case 'auth/network-request-failed':
-                    setErrorToShow('Hubo un error en la conexión');
-                    break;
-                case 'auth/too-many-requests':
-                    setErrorToShow('Hubo una actividad inusual, espera unos minutos e intenta de nuevo');
+                    setErrorEmail('No es un formato de email válido');
                     break;
                 case 'auth/user-disabled':
-                    setErrorToShow('Lo sentimos, tu usuario fue inhabilitado');
+                    setErrorEmail('Lo sentimos, tu usuario fue inhabilitado');
+                    break;                    
+                case 'auth/wrong-password':
+                    setErrorPassword('La contraseña es inválida');
+                    break;                    
+                case 'auth/network-request-failed':
+                    setErrorGeneral('Hubo un error en la conexión');
+                    break;
+                case 'auth/too-many-requests':
+                    setErrorGeneral('Hubo una actividad inusual, espera unos minutos e intenta de nuevo');
                     break;
                 default:
-                    setErrorToShow('');
+                    setErrorEmail('');
+                    setErrorPassword('');
+                    setErrorGeneral('');
                     break;
             }
         } else {
@@ -94,19 +99,19 @@ const Login = () => {
     return (
     <>  
     <section>
-        <label htmlFor="email">Ingrese Email</label>
+        <label htmlFor="email">Email</label>
         <input 
             type="email"
             name="email"
             onChange={handleChange}/>
-        <p>{errorToShow}</p>    
+        <p>{errorEmail}</p>    
 
         <label htmlFor="password">Contraseña</label>
         <input 
             type="password"
             name="password"
             onChange={handleChange}/>
-        <p>Texto incorrecto</p>
+        <p>{errorPassword}</p>
 
         <button
           onClick={() => validateCredentials()}>
@@ -143,6 +148,8 @@ const Login = () => {
           }}
         </FirebaseAuthConsumer>
     </section>
+
+    <Form />
     </>
     )
 }
