@@ -36,6 +36,16 @@ const Login = () => {
     const [errorEmail, setErrorEmail] = useState('');
     const [errorPassword, setErrorPassword] = useState('');
     const [errorGeneral, setErrorGeneral] = useState('');
+    const [userLocalState, setUserLocalState] = useState({
+        _isSignedIn: null,
+        _user: null,
+        _providerId: null
+    })
+
+    //  Update state when changes
+    useEffect(() => {
+        dispatch(update_state_user_action(userLocalState));
+    }, [userLocalState])
 
     //  Save username and password when writing
     const handleChange = e => {
@@ -135,10 +145,13 @@ const Login = () => {
 
         <FirebaseAuthConsumer>
           {({ isSignedIn, user, providerId }) => {
-            const fbAuthConsumer = { isSignedIn , user , providerId };
             setTimeout(() => {
-                dispatch(update_state_user_action(fbAuthConsumer));
-            }, 100);
+                setUserLocalState({
+                    _isSignedIn: isSignedIn,
+                    _user: user,
+                    _providerId: providerId,
+                })
+            }, 200);
 
             return (
               <pre style={{ height: 300, overflow: "auto" }}>
