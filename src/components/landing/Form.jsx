@@ -1,12 +1,155 @@
-import { useState } from "react";
+/*::::::::::::::::::::: 
+::::  Dependencies ::::
+:::::::::::::::::::::::*/
+
+//  React
+import { useEffect, useState } from "react";
+//  Redux
+import { useDispatch, useSelector } from "react-redux";
+import { set_auth_error_msg_action, update_state_user_action } from "../../redux/ducks";
+//  Router
+import { useHistory } from "react-router";
+//  Firebase
+import { emailAndPasswordLogin, facebookLogIn, googleLogIn, registerNewUser, resetPasswordOption } from "../../helpers/authMethods";
+import { FirebaseAuthConsumer } from "@react-firebase/auth";
+//  Styles
 import { Button, CssBaseline, Grid, Link, Paper, TextField, Typography } from "@material-ui/core";
+import Alert from '@material-ui/lab/Alert';
 import FormStyles from "../../styles/FormStyles";
 
+
+/*::::::::::::::::::::: 
+:::::  Component  :::::
+:::::::::::::::::::::::*/
+
 const Form = () => {
-
+    //  Styles
     const classes = FormStyles();
-
+    //  Dispatch
+    const dispatch = useDispatch();
+    //  Global states
+    const fbUser = useSelector(state => state.fbUser);
+    const fbAuthError = useSelector(state => state.fbAuthError);
+    //  Local states
     const [signUp, setSignUp] = useState(false);
+    const [resetPassword, setResetPassword] = useState(false);
+    const [userCredentials, setUserCredentials] = useState({
+        email: '',
+        password: ''
+    })
+    const [errorEmail, setErrorEmail] = useState('');
+    const [errorPassword, setErrorPassword] = useState('');
+    const [errorGeneral, setErrorGeneral] = useState(null);
+    const [successGeneral, setSuccessGeneral] = useState(null);
+    const [userLocalState, setUserLocalState] = useState({
+        _isSignedIn: null,
+        _user: null,
+        _providerId: null
+    })
+
+    //  Save username and password when writing
+    const handleChange = e => {
+        setUserCredentials({
+            ...userCredentials,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    // Log in validation with email and password
+    const validateCredentials = async() => {
+
+        if(resetPassword){
+            if (userCredentials.email.trim() === '') {
+                setErrorEmail('Debes ingresar un email');
+            } else {
+                setErrorEmail(null);
+            }
+        } else {
+            if (userCredentials.email.trim() === '') {
+                setErrorEmail('Debes ingresar un email');
+            } else {
+                setErrorEmail(null);
+            }
+
+            if (userCredentials.password.trim() === '') {
+                setErrorPassword('Debes ingresar una contraseña');
+            } else if (userCredentials.password.length < 6) {
+                setErrorPassword('Debe tener mínimo 6 caracteres');
+            } else {
+                setErrorPassword(null);
+            }
+        }
+
+        if(userCredentials.email.trim() !== '' && userCredentials.password.trim() !== '' && userCredentials.password.length >= 6){
+            
+            if(resetPassword){
+                const responseMsg = await resetPasswordOption(userCredentials.email);
+
+                dispatch(set_auth_error_msg_action(responseMsg));
+
+                if (fbAuthError !== null) {
+                    setSuccessGeneral('Revisa tu correo para restablecer tu contraseña');
+                } else {
+                    setSuccessGeneral(null);
+                }
+                
+            } else if(signUp){
+                const responseMsg = await registerNewUser(userCredentials.email, userCredentials.password);
+        
+                dispatch(set_auth_error_msg_action(responseMsg));
+
+            } else {
+                const responseMsg = await emailAndPasswordLogin(userCredentials.email, userCredentials.password);
+        
+                dispatch(set_auth_error_msg_action(responseMsg));
+
+            }
+        }
+    }
+
+    //  Error messages
+    useEffect(() => {
+        if(fbAuthError !== null){
+            switch (fbAuthError) {
+                case 'auth/user-not-found':
+                    setErrorEmail('El email no es correcto');
+                    break;
+                case 'auth/invalid-email':
+                    setErrorEmail('No es un formato de email válido');
+                    break;
+                case 'auth/user-disabled':
+                    setErrorEmail('Lo sentimos, tu usuario fue inhabilitado');
+                    break;                    
+                case 'auth/wrong-password':
+                    setErrorPassword('La contraseña es inválida');
+                    break;                    
+                case 'auth/network-request-failed':
+                    setErrorGeneral('Hubo un error en la conexión');
+                    break;
+                case 'auth/too-many-requests':
+                    setErrorGeneral('Hubo una actividad inusual, espera unos minutos e intenta de nuevo');
+                    break;
+                default:
+                    setErrorEmail(null);
+                    setErrorPassword(null);
+                    setErrorGeneral(null);
+                    break;
+            }
+        } else {
+
+        }
+        // eslint-disable-next-line
+    }, [fbAuthError, errorEmail, errorPassword, errorGeneral])
+
+    //  Routing
+    let history = useHistory();
+    
+    useEffect(() => {
+        if(fbUser.isSignedIn){
+            history.push('/home');
+        }
+        // eslint-disable-next-line
+    }, [fbUser])
 
     return (
     <>
@@ -15,22 +158,25 @@ const Form = () => {
             <Grid item xs={false} sm={4} md={7} className={classes.image} />
                 <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square >
                     <div className={classes.paper}>
-                        {/*  === Título === */}
-                        <Typography component="h2" variant="h5">
-                        {signUp ? 'Registrarse' : 'Iniciar sesión'}
+                        {/*  === Title === */}
+                        <Typography component="h3" variant="h5">
+                        {signUp ? 'Registrarse' : resetPassword ? 'Restablecer contraseña' : 'Iniciar sesión'}
                         </Typography>
-                    <div className={classes.borde}>
+                    <div className="borde">
                         <Link 
                             href="#" 
                             variant="body2"
                             onClick={(e) => {
                             e.preventDefault();
-                            setSignUp(!signUp)}}>
-                            {signUp ? '< Volver' : null}
+                            signUp ? 
+                            setSignUp(!signUp) 
+                            :
+                            setResetPassword(!resetPassword)}}>
+                            {signUp || resetPassword ? '< Volver' : null}
                         </Link>
                         <form className={classes.form}>
                         {
-                            // error ? (<Alert severity="error">{error}</Alert>) : null
+                            errorGeneral !== null ? (<Alert severity="error">{errorGeneral}</Alert>) : null
                         }
                             {/*  === Email === */}
                             <TextField
@@ -42,10 +188,19 @@ const Form = () => {
                                 type="email"
                                 name="email"
                                 placeholder="Email"
+                                onChange={handleChange}
                                 // value={email}
                             />
+                            {errorEmail !== null ?
+                            <p>{errorEmail}</p>
+                            :
+                            null    
+                            }
 
                             {/*  === Password === */}
+                            {resetPassword ?
+                            null
+                            :
                             <TextField
                                 variant="outlined"
                                 margin="normal"
@@ -55,8 +210,15 @@ const Form = () => {
                                 type="password"
                                 name="password"
                                 placeholder="Password"
+                                onChange={handleChange}
                                 // value={pass}
                             />
+                            }
+                            {errorPassword !== null ?
+                            <p>{errorPassword}</p>
+                            :
+                            null    
+                            }
                             <Grid container justify="center">
                                 {/*  === Main Button === */}
                                 <Button  
@@ -64,24 +226,31 @@ const Form = () => {
                                 fullWidth
                                 variant="contained"
                                 color="black"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    validateCredentials();}}
                                 className={classes.submitI}>
                                     {signUp ? 'Registrarse' : 'Iniciar sesión'}
                                 </Button>
                             </Grid>
+                            {/* === Links === */}
                             <Grid container>
                                 <Grid item>
                                     <Link href="#" variant="body2"
                                     onClick={(e) => {
                                         e.preventDefault();
                                         setSignUp(!signUp)}}>
-                                        {signUp ? null : '¿No tienes cuenta?'}
+                                        {signUp || resetPassword? null : '¿No tienes cuenta?'}
                                     </Link>
                                 </Grid>
                                 &nbsp;&nbsp;&nbsp;
 
                                 <Grid item>
-                                    <Link href="#" variant="body2">
-                                        ¿Olvidaste tu contraseña?
+                                    <Link href="#" variant="body2"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setResetPassword(!resetPassword)}}>
+                                        {resetPassword || signUp? null : '¿Olvidaste tu contraseña?'}
                                     </Link>
                                 </Grid>
                             </Grid>
@@ -93,6 +262,9 @@ const Form = () => {
                                     <hr className={classes.raya}/> <div className={classes.circulo}></div> <hr className={classes.raya2}/>
                                 </Grid>
                             </Grid>
+                            {signUp || resetPassword ? 
+                            null
+                            :
                             <Grid container>
                                 <Grid item>
                                     <Button  
@@ -101,7 +273,8 @@ const Form = () => {
                                     color="primary" 
                                     className={classes.btnfacebook}                 
                                     fullWidth
-                                    disabled={false}>
+                                    disabled={false}
+                                    onClick={() => facebookLogIn()}>
                                     Facebook            
                                     </Button>
                                 </Grid>
@@ -113,16 +286,27 @@ const Form = () => {
                                     color="primary" 
                                     className={classes.btngoogle}                 
                                     fullWidth
-                                    disabled={false}>
+                                    disabled={false}
+                                    onClick={() => googleLogIn()}>
                                     Google            
                                     </Button>
                                 </Grid>
                             </Grid>  
+                            }
                         </div>
                     </div>
                 </div>
           </Grid>
     </Grid>
+
+    <FirebaseAuthConsumer>
+        {({ isSignedIn, user, providerId }) => {
+        let fbAuthConsumer = { isSignedIn, user, providerId };
+        setTimeout(() => {
+            dispatch(update_state_user_action(fbAuthConsumer));
+        }, 200);
+        }}
+    </FirebaseAuthConsumer>
     </>
     )
 }

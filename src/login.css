@@ -1,8 +1,16 @@
+.borde{
+    box-shadow: 0px 12px 23px -14px black;
+    padding: 6vw;
+    width: 91%;
+    border-radius: 18px;
+    background: white;
+}
+
 .MuiGrid-container {   
     justify-content: center;
 }
 .MuiTypography-h5 {
-    font-size: 3.5rem !important;
+    font-size: 2.5rem !important;
     padding-bottom: 4vh;
     font-weight: bold;
     color: white;

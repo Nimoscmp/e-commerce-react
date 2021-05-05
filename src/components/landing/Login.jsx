@@ -23,92 +23,95 @@ import Form from "./Form";
 :::::::::::::::::::::::*/
 
 const Login = () => {
-    //  Dispatch
-    const dispatch = useDispatch();
-    //  Global states
-    const fbUser = useSelector(state => state.fbUser);
-    const fbAuthError = useSelector(state => state.fbAuthError);
-    //  Local states
-    const [userCredentials, setUserCredentials] = useState({
-        email: '',
-        password: ''
-    })
-    const [errorEmail, setErrorEmail] = useState('');
-    const [errorPassword, setErrorPassword] = useState('');
-    const [errorGeneral, setErrorGeneral] = useState('');
-    const [userLocalState, setUserLocalState] = useState({
-        _isSignedIn: null,
-        _user: null,
-        _providerId: null
-    })
 
-    //  Update state when changes
-    useEffect(() => {
-        dispatch(update_state_user_action(userLocalState));
-    }, [userLocalState])
 
-    //  Save username and password when writing
-    const handleChange = e => {
-        setUserCredentials({
-            ...userCredentials,
-            [e.target.name]: e.target.value
-        })
-    }
 
-    // Log in validation with email and password
-    const validateCredentials = async() => {
-        const responseMsg = await emailAndPasswordLogin(userCredentials.email, userCredentials.password);
+    // //  Dispatch
+    // const dispatch = useDispatch();
+    // //  Global states
+    // const fbUser = useSelector(state => state.fbUser);
+    // const fbAuthError = useSelector(state => state.fbAuthError);
+    // //  Local states
+    // const [userCredentials, setUserCredentials] = useState({
+    //     email: '',
+    //     password: ''
+    // })
+    // const [errorEmail, setErrorEmail] = useState('');
+    // const [errorPassword, setErrorPassword] = useState('');
+    // const [errorGeneral, setErrorGeneral] = useState('');
+    // // const [userLocalState, setUserLocalState] = useState({
+    // //     _isSignedIn: null,
+    // //     _user: null,
+    // //     _providerId: null
+    // // })
 
-        dispatch(set_auth_error_msg_action(responseMsg));
-    }
+    // //  Update state when changes
+    // // useEffect(() => {
+    // //     dispatch(update_state_user_action(userLocalState));
+    // // }, [userLocalState])
 
-    //  Error messages
-    useEffect(() => {
-        if(fbAuthError !== null){
-            switch (fbAuthError) {
-                case 'auth/user-not-found':
-                    setErrorEmail('El email no es correcto');
-                    break;
-                case 'auth/invalid-email':
-                    setErrorEmail('No es un formato de email válido');
-                    break;
-                case 'auth/user-disabled':
-                    setErrorEmail('Lo sentimos, tu usuario fue inhabilitado');
-                    break;                    
-                case 'auth/wrong-password':
-                    setErrorPassword('La contraseña es inválida');
-                    break;                    
-                case 'auth/network-request-failed':
-                    setErrorGeneral('Hubo un error en la conexión');
-                    break;
-                case 'auth/too-many-requests':
-                    setErrorGeneral('Hubo una actividad inusual, espera unos minutos e intenta de nuevo');
-                    break;
-                default:
-                    setErrorEmail('');
-                    setErrorPassword('');
-                    setErrorGeneral('');
-                    break;
-            }
-        } else {
+    // //  Save username and password when writing
+    // const handleChange = e => {
+    //     setUserCredentials({
+    //         ...userCredentials,
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
 
-        }
-        // eslint-disable-next-line
-    }, [fbAuthError])
+    // // Log in validation with email and password
+    // const validateCredentials = async() => {
+    //     const responseMsg = await emailAndPasswordLogin(userCredentials.email, userCredentials.password);
 
-    //  Routing
-    let history = useHistory();
+    //     dispatch(set_auth_error_msg_action(responseMsg));
+    // }
+
+    // //  Error messages
+    // useEffect(() => {
+    //     if(fbAuthError !== null){
+    //         switch (fbAuthError) {
+    //             case 'auth/user-not-found':
+    //                 setErrorEmail('El email no es correcto');
+    //                 break;
+    //             case 'auth/invalid-email':
+    //                 setErrorEmail('No es un formato de email válido');
+    //                 break;
+    //             case 'auth/user-disabled':
+    //                 setErrorEmail('Lo sentimos, tu usuario fue inhabilitado');
+    //                 break;                    
+    //             case 'auth/wrong-password':
+    //                 setErrorPassword('La contraseña es inválida');
+    //                 break;                    
+    //             case 'auth/network-request-failed':
+    //                 setErrorGeneral('Hubo un error en la conexión');
+    //                 break;
+    //             case 'auth/too-many-requests':
+    //                 setErrorGeneral('Hubo una actividad inusual, espera unos minutos e intenta de nuevo');
+    //                 break;
+    //             default:
+    //                 setErrorEmail('');
+    //                 setErrorPassword('');
+    //                 setErrorGeneral('');
+    //                 break;
+    //         }
+    //     } else {
+
+    //     }
+    //     // eslint-disable-next-line
+    // }, [fbAuthError])
+
+    // //  Routing
+    // let history = useHistory();
     
-    useEffect(() => {
-        if(fbUser.isSignedIn){
-            history.push('/home');
-        }
-        // eslint-disable-next-line
-    }, [fbUser])
+    // useEffect(() => {
+    //     if(fbUser.isSignedIn){
+    //         history.push('/home');
+    //     }
+    //     // eslint-disable-next-line
+    // }, [fbUser])
 
     return (
     <>  
-    <section>
+    {/* <section>
         <label htmlFor="email">Email</label>
         <input 
             type="email"
@@ -145,13 +148,11 @@ const Login = () => {
 
         <FirebaseAuthConsumer>
           {({ isSignedIn, user, providerId }) => {
+            let fbAuthConsumer = { isSignedIn, user, providerId };
             setTimeout(() => {
-                setUserLocalState({
-                    _isSignedIn: isSignedIn,
-                    _user: user,
-                    _providerId: providerId,
-                })
+                dispatch(update_state_user_action(fbAuthConsumer));
             }, 200);
+            
 
             return (
               <pre style={{ height: 300, overflow: "auto" }}>
@@ -160,7 +161,7 @@ const Login = () => {
             );
           }}
         </FirebaseAuthConsumer>
-    </section>
+    </section> */}
 
     <Form />
     </>

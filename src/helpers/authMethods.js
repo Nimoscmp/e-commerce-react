@@ -27,6 +27,19 @@ export const emailAndPasswordLogin = async(email , password) => {
     return errorCode;
 }
 
+export const resetPasswordOption = async(email) => {
+    let errorCode = null;
+
+    try {
+        await firebase.auth().sendPasswordResetEmail(email);
+    } catch (error) {
+        console.log(error);
+        errorCode = error.code;
+    }
+
+    return errorCode;
+}
+
 export const googleLogIn = () => {
     const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(googleAuthProvider);

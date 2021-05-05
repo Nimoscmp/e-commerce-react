@@ -84,13 +84,6 @@ const FormStyles = makeStyles((theme) => ({
         marginTop: '10px',
         marginBottom: '10px'
     },
-    borde : {
-        boxShadow: '0px 12px 23px -14px black',
-        padding: '6vw',
-        width: '91%',
-        borderRadius: '18px',
-        background: 'white'
-    }
   }));
 
   export default FormStyles
