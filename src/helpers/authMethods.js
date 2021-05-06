@@ -41,8 +41,17 @@ export const resetPasswordOption = async(email) => {
 }
 
 export const googleLogIn = () => {
-    const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(googleAuthProvider);
+    let errorCode = null;
+
+    try {
+        const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(googleAuthProvider);
+    } catch (error) {
+        console.log(error);
+        errorCode = error.code;
+    }
+
+    return errorCode;
 }
 
 export const facebookLogIn = () => {
@@ -60,5 +69,14 @@ export const facebookLogIn = () => {
 }
 
 export const logOut = () => {
-    firebase.auth().signOut();
+    let errorCode = null; 
+
+    try {
+        firebase.auth().signOut();
+    } catch (error) {
+        console.log(error);
+        errorCode = error.code;
+    }
+
+    return errorCode;
 }

@@ -293,7 +293,10 @@ const Form = () => {
                                     className={classes.btnfacebook}                 
                                     fullWidth
                                     disabled={false}
-                                    onClick={() => facebookLogIn()}>
+                                    onClick={() => {
+                                        const loginFacebook = facebookLogIn();
+                                        dispatch(set_auth_error_msg_action(loginFacebook));
+                                        }}>
                                     Facebook            
                                     </Button>
                                 </Grid>
@@ -306,7 +309,10 @@ const Form = () => {
                                     className={classes.btngoogle}                 
                                     fullWidth
                                     disabled={false}
-                                    onClick={() => googleLogIn()}>
+                                    onClick={() => {
+                                        const loginGoogle = googleLogIn();
+                                        dispatch(set_auth_error_msg_action(loginGoogle));
+                                        }}>
                                     Google            
                                     </Button>
                                 </Grid>
