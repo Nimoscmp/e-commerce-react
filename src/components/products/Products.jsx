@@ -165,13 +165,13 @@ const Products = () => {
                             alt={item.title}
                             className={matches_576 ? classes.cardImg : classes.cardImgMini}/>
                     </div>
-                    <div className={classes.cardPrice}>
+                    {/* <div className={classes.cardPrice}>
                         <Grade className={classes.cardRate}/>
                         <Grade className={classes.cardRate}/>
                         <Grade className={classes.cardRate}/>
                         <Grade className={classes.cardRate}/>
                         <Grade className={classes.cardRate}/>
-                    </div>
+                    </div> */}
                     <div className={classes.cardButtons}>
                         <Button 
                             variant="outlined" 
