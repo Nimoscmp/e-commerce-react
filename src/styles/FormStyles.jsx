@@ -69,8 +69,9 @@ const FormStyles = makeStyles((theme) => ({
         background: '#acacac'
     },
     raya2 : {
+        float : 'right',
         width: '6vw',
-        marginTop: '23px',
+        margin: '23px 0',
         background: '#acacac'
     },    
     circulo : {
@@ -81,9 +82,14 @@ const FormStyles = makeStyles((theme) => ({
         background: '#acacac'
     },
     lin : {
+        width: '50%',
         marginTop: '10px',
         marginBottom: '10px'
     },
+    errorParagh : {
+        color: '#c49621',
+        margin: '0.125rem'   
+    }
   }));
 
   export default FormStyles

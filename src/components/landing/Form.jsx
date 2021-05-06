@@ -12,6 +12,7 @@ import { useHistory } from "react-router";
 //  Firebase
 import { emailAndPasswordLogin, facebookLogIn, googleLogIn, registerNewUser, resetPasswordOption } from "../../helpers/authMethods";
 import { FirebaseAuthConsumer } from "@react-firebase/auth";
+import firebase from "firebase/app";
 //  Styles
 import { Button, CssBaseline, Grid, Link, Paper, TextField, Typography } from "@material-ui/core";
 import Alert from '@material-ui/lab/Alert';
@@ -80,29 +81,25 @@ const Form = () => {
             }
         }
 
-        if(userCredentials.email.trim() !== '' && userCredentials.password.trim() !== '' && userCredentials.password.length >= 6){
-            
+        if (userCredentials.email.trim() !== '') {
             if(resetPassword){
                 const responseMsg = await resetPasswordOption(userCredentials.email);
-
                 dispatch(set_auth_error_msg_action(responseMsg));
-
                 if (fbAuthError !== null) {
                     setSuccessGeneral('Revisa tu correo para restablecer tu contraseña');
                 } else {
                     setSuccessGeneral(null);
                 }
-                
-            } else if(signUp){
-                const responseMsg = await registerNewUser(userCredentials.email, userCredentials.password);
+            }
+        }
         
+        if(userCredentials.email.trim() !== '' && userCredentials.password.trim() !== '' && userCredentials.password.length >= 6){
+            if(signUp){
+                const responseMsg = await registerNewUser(userCredentials.email, userCredentials.password);
                 dispatch(set_auth_error_msg_action(responseMsg));
-
             } else {
                 const responseMsg = await emailAndPasswordLogin(userCredentials.email, userCredentials.password);
-        
                 dispatch(set_auth_error_msg_action(responseMsg));
-
             }
         }
     }
@@ -120,14 +117,23 @@ const Form = () => {
                 case 'auth/user-disabled':
                     setErrorEmail('Lo sentimos, tu usuario fue inhabilitado');
                     break;                    
+                case 'auth/email-already-in-use':
+                    setErrorEmail('Este email ya está en uso');
+                    break;                    
                 case 'auth/wrong-password':
                     setErrorPassword('La contraseña es inválida');
+                    break;                    
+                case 'auth/weak-password':
+                    setErrorPassword('La contraseña es débil');
                     break;                    
                 case 'auth/network-request-failed':
                     setErrorGeneral('Hubo un error en la conexión');
                     break;
                 case 'auth/too-many-requests':
                     setErrorGeneral('Hubo una actividad inusual, espera unos minutos e intenta de nuevo');
+                    break;
+                case 'auth/account-exists-with-different-credential':
+                    setErrorGeneral('Ya tienes registrada esta cuenta con otras credenciales. Intenta con otra cuenta');
                     break;
                 default:
                     setErrorEmail(null);
@@ -151,6 +157,13 @@ const Form = () => {
         // eslint-disable-next-line
     }, [fbUser])
 
+
+    let fbAuthConsumer = {
+        isSignedIn: null,
+        user: null,
+        providerId: null
+    };
+
     return (
     <>
     <Grid container component="main" className={classes.root}>
@@ -171,12 +184,18 @@ const Form = () => {
                             signUp ? 
                             setSignUp(!signUp) 
                             :
-                            setResetPassword(!resetPassword)}}>
+                            setResetPassword(!resetPassword)
+                            setSuccessGeneral(null);
+                            }}>
                             {signUp || resetPassword ? '< Volver' : null}
                         </Link>
                         <form className={classes.form}>
                         {
-                            errorGeneral !== null ? (<Alert severity="error">{errorGeneral}</Alert>) : null
+                            errorGeneral !== null ? (<Alert severity="error">{errorGeneral}</Alert>) :  null
+                        }
+
+                        {
+                            successGeneral !== null && resetPassword? (<Alert severity="success">{successGeneral}</Alert>) : null
                         }
                             {/*  === Email === */}
                             <TextField
@@ -192,7 +211,7 @@ const Form = () => {
                                 // value={email}
                             />
                             {errorEmail !== null ?
-                            <p>{errorEmail}</p>
+                            <p className={classes.errorParagh}>{errorEmail}</p>
                             :
                             null    
                             }
@@ -215,7 +234,7 @@ const Form = () => {
                             />
                             }
                             {errorPassword !== null ?
-                            <p>{errorPassword}</p>
+                            <p className={classes.errorParagh}>{errorPassword}</p>
                             :
                             null    
                             }
@@ -230,7 +249,7 @@ const Form = () => {
                                     e.preventDefault();
                                     validateCredentials();}}
                                 className={classes.submitI}>
-                                    {signUp ? 'Registrarse' : 'Iniciar sesión'}
+                                    {signUp ? 'Registrarse' : resetPassword ? 'Restablecer' : 'Iniciar sesión'}
                                 </Button>
                             </Grid>
                             {/* === Links === */}
@@ -296,15 +315,21 @@ const Form = () => {
                         </div>
                     </div>
                 </div>
-          </Grid>
+            </Grid>
     </Grid>
 
     <FirebaseAuthConsumer>
         {({ isSignedIn, user, providerId }) => {
-        let fbAuthConsumer = { isSignedIn, user, providerId };
+        
+        fbAuthConsumer = { isSignedIn, user, providerId };      
+        
+        // firebase.auth().onAuthStateChanged(function(user) {
+        //     if (user) {
+        //     }
+        // });
         setTimeout(() => {
             dispatch(update_state_user_action(fbAuthConsumer));
-        }, 200);
+        }, 100);
         }}
     </FirebaseAuthConsumer>
     </>

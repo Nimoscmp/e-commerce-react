@@ -46,8 +46,17 @@ export const googleLogIn = () => {
 }
 
 export const facebookLogIn = () => {
-    const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
-    firebase.auth().signInWithPopup(facebookAuthProvider);
+    let errorCode = null;
+
+    try {
+        const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
+        firebase.auth().signInWithPopup(facebookAuthProvider);
+    } catch (error) {
+        console.log(error);
+        errorCode = error.code;
+    }
+
+    return errorCode;
 }
 
 export const logOut = () => {
