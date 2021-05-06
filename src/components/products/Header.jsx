@@ -38,6 +38,7 @@ const Header = () => {
     }
     const logOutClick = () => {
         handleClose();
+        logOut();
     }
 
 

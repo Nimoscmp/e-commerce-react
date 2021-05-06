@@ -66,12 +66,6 @@ const FormStyles = makeStyles((theme) => ({
         width: '80%',
         margin: '5px 0 ',
         background: '#acacac'
-    },
-    raya2 : {
-        float : 'right',
-        width: '6vw',
-        margin: '23px 0',
-        background: '#acacac'
     },    
     circulo : {
         position: 'absolute',
