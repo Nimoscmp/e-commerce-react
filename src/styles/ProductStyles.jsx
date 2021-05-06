@@ -104,9 +104,10 @@ const ProductStyles = makeStyles((theme) => ({
         margin: '0 0.5rem'
     },
     cardImage: {
+        width: '100%',
         display: 'flex',
         justifyContent: 'center',
-        margin: '0.25rem 0'
+        margin: '0.25rem 0 6rem'
     },
     cardImg : {
         width: '60%',

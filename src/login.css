@@ -1,0 +1,46 @@
+.borde{
+    box-shadow: 0px 12px 23px -14px black;
+    padding: 6vw;
+    width: 91%;
+    border-radius: 18px;
+    background: white;
+}
+
+.MuiGrid-container {   
+    justify-content: center;
+}
+.MuiTypography-h5 {
+    font-size: 2.5rem !important;
+    padding-bottom: 4vh;
+    font-weight: bold;
+    color: white;
+}
+
+.MuiPaper-root.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-8.MuiGrid-grid-md-5.MuiPaper-elevation6{
+        height: 80vh;
+      background-color: #7c0362;
+      border-radius: 0 0 80% 80%;	
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      border-bottom-left-radius: 54% 66%;
+      border-bottom-right-radius: 54% 66%;
+}
+
+@media (max-width: 768px) {
+    .MuiPaper-root.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-8.MuiGrid-grid-md-5.MuiPaper-elevation6 {
+        height: 68vh;
+    }
+}
+
+@media (min-width: 1670px) {
+    .borde{
+        width: 75%;
+    }
+    .MuiPaper-root.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-8.MuiGrid-grid-md-5.MuiPaper-elevation6 {
+        height: 60vh;
+    }
+    .makeStyles-paper-4 {
+        margin: 15vh 32px;
+    }  
+}
