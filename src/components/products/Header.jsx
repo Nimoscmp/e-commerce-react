@@ -6,6 +6,7 @@ import { Fade, Menu, MenuItem, useMediaQuery } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { ArrowBackRounded, MenuRounded, ShoppingCartOutlined } from "@material-ui/icons";
+import { logOut } from "../../helpers/authMethods";
 
 const Header = () => {
     //  Styles
@@ -54,7 +55,10 @@ const Header = () => {
                         style={{color: cartTab ? 'white' : 'inherit'}}
                         onClick={() => dispatch(select_cart_action())}>Carrito</li>
                     <li className={classes.marginTwo}
-                        style={{}}>Cerrar sesión</li>
+                        style={{}}
+                        onClick={() => {
+                            console.log('logged out')
+                            logOut()}}>Cerrar sesión</li>
                 </ul>
                 <div 
                     className={classes.bar}

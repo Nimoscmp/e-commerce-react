@@ -1,9 +1,35 @@
-import { Provider } from "react-redux";
-import { BrowserRouter as Router, Link, Redirect, Route, Switch } from 'react-router-dom';
+/*::::::::::::::::::::: 
+::::  Dependencies ::::
+:::::::::::::::::::::::*/
+
+//  React
+import { useEffect, useState } from "react";
+//  Redux
+import { Provider, useSelector } from "react-redux";
 import generateStore from "./redux/store";
-import Login from "./components/Login";
+//  Router
+import { BrowserRouter as Router, Link, Redirect, Route, Switch } from 'react-router-dom';
+//  Firebase
+import fbConfig from "./services/firebase/fbConfig";
+import firebase from "firebase/app";
+import { FirebaseAuthProvider } from "@react-firebase/auth";
+//  Components
 import Main from "./components/Main";
-import Reset from "./components/Reset";
+import Landing from "./components/Landing";
+// import { auth } from "./services/firebase/firebase";
+// import {
+//   FirebaseAuthProvider,
+//   FirebaseAuthConsumer,
+//   IfFirebaseAuthed,
+//   IfFirebaseAuthedAnd
+// } from "@react-firebase/auth";
+// import fbConfig from "./services/firebase/fbConfig";
+// import firebase from "firebase/app";
+// import "firebase/auth";
+
+/*::::::::::::::::::::: 
+:::::  Component  :::::
+:::::::::::::::::::::::*/
 
 function App() {
 
@@ -11,12 +37,13 @@ function App() {
 
   return (
     <>
+    <FirebaseAuthProvider {...fbConfig} firebase={firebase}>
       <Provider
         store={store}>
 
         <Router>
-
-          <nav style={{marginTop: '6rem'}}>
+        {/* //Navigation provisory */}
+          {/* <nav style={{marginTop: '6rem'}}>
             <ul>
               <li>
                 <Link to="/login">Login</Link>
@@ -28,7 +55,7 @@ function App() {
                 <Link to="/reset">Reset</Link>
               </li>
             </ul>
-          </nav>
+          </nav> */}
 
           <Switch>
 
@@ -36,23 +63,20 @@ function App() {
 
             {/* Login route */}
             <Route path="/login">
-              <Login/>
+              <Landing/>
             </Route>
             {/* Home route  */}
             <Route path="/home">
               <Main/>
             </Route>
-            {/* Reset route  */}
-            <Route path="/reset">
-              <Reset/>
-            </Route> 
+            
+            <Redirect to="/"/> 
 
           </Switch>
 
-          <Main />
-
         </Router>
       </Provider>
+    </FirebaseAuthProvider>
     </>
   );
 }

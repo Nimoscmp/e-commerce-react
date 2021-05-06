@@ -17,6 +17,8 @@ const stateNotif = false;
 const showModal = false;
 //  Initial product detailed
 const productDetailed = {}
+//  Initial firebase auth consumer
+const fbAuthConsumer = {}
 
 /*::::::::::::::::::::: 
 :::      Types      :::
@@ -41,9 +43,17 @@ const types = {
     HIDE_MODAL: 'HIDE_MODAL',
     //  Product detailed
     PRODUCT_DETAILED: 'PRODUCT_DETAILED',
-    // Quantity types
+    //  Quantity types
     QUANTITY_ADD: 'QUANTITY_ADD',
-    QUANTITY_SUBSTRACT: 'QUANTITY_SUBSTRACT'
+    QUANTITY_SUBSTRACT: 'QUANTITY_SUBSTRACT',
+
+
+    // ---- Firebase ----
+
+    //  Update state about user
+    UPDATE_STATE_USER: 'UPDATE_STATE_USER',
+    //  Set auth error message
+    SET_AUTH_ERROR_MSG: 'SET_AUTH_ERROR_MSG'
 }
 
 /*::::::::::::::::::::: 
@@ -136,6 +146,24 @@ export function productDetailedReducer(state = productDetailed, action) {
     }
 }
 
+
+export function firebaseUserReducer(state = fbAuthConsumer, action) {
+    switch (action.type) {
+        case types.UPDATE_STATE_USER:
+            return action.payload
+        default:
+            return state;
+    }
+}
+export function firebaseAuthErrorReducer(state = '', action) {
+    switch (action.type) {
+        case types.SET_AUTH_ERROR_MSG:
+            return action.payload
+        default:
+            return state;
+    }
+}
+
 /*::::::::::::::::::::: 
 :::     Actions     :::
 :::::::::::::::::::::::*/
@@ -217,5 +245,23 @@ export const product_detailed_action = (_id, _title, _price, _description, _cate
             category: _category,
             img: _img
         }
+    })
+}
+
+
+// ---- Firebase ----
+
+//  Update state user
+export const update_state_user_action = (userConsumer) => async (dispatch) => {
+    dispatch({
+        type: types.UPDATE_STATE_USER,
+        payload: userConsumer
+    })
+}
+//  Set auth error message
+export const set_auth_error_msg_action = (message) => async (dispatch) => {
+    dispatch({
+        type: types.SET_AUTH_ERROR_MSG,
+        payload: message
     })
 }
