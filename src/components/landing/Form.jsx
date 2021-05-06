@@ -278,7 +278,9 @@ const Form = () => {
                         <div>
                             <Grid container>
                                 <Grid item xs className={classes.lin}>
-                                    <hr className={classes.raya}/> <div className={classes.circulo}></div> <hr className={classes.raya2}/>
+                                    <hr className={classes.raya}/> 
+                                    <div className={classes.circulo}></div> 
+                                    {/* <hr className={classes.raya2}/> */}
                                 </Grid>
                             </Grid>
                             {signUp || resetPassword ? 

@@ -63,9 +63,8 @@ const FormStyles = makeStyles((theme) => ({
 
     //////
     raya : {
-        float: 'left',
-        width: '6vw',
-        marginTop: '23px',
+        width: '80%',
+        margin: '5px 0 ',
         background: '#acacac'
     },
     raya2 : {
@@ -75,16 +74,22 @@ const FormStyles = makeStyles((theme) => ({
         background: '#acacac'
     },    
     circulo : {
-        float: 'left',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
         width: '50px',
         height: '50px',
         borderRadius: '50%',
         background: '#acacac'
     },
     lin : {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         width: '50%',
-        marginTop: '10px',
-        marginBottom: '10px'
+        margin: '2rem 0',
+        position: 'relative'
     },
     errorParagh : {
         color: '#c49621',
