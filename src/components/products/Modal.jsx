@@ -101,9 +101,9 @@ const Modal = ({ addToCartModal }) => {
         <div className={classes.modalImage}>
             <img src={img} alt={title} className={classes.modalImg}/>
         </div>
-        <h5 className={classes.modalCat}>{category}</h5>
+        <h5 className={classes.modalCat}>{category?.charAt(0).toUpperCase() + category?.slice(1)}</h5>
         <div className={classes.modalDesc}>
-            <p className={classes.modalParagh}><small>{description?.toLowerCase()}</small></p>
+            <p className={classes.modalParagh}><small>{description?.charAt(0).toUpperCase() + description?.slice(1)}</small></p>
         </div>
         <div className={classes.modalPrice}>
             <span className={classes.modalPricePrev}><del>${Math.round(price * 1.2)}</del></span>
