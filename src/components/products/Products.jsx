@@ -1,12 +1,24 @@
-// import useStyles from "../../styles/Styles"
-import ProductStyles from "../../styles/ProductStyles";
-import { BookmarkRounded, Grade } from '@material-ui/icons';
-import { Button, CircularProgress, MenuItem, TextField, useMediaQuery } from "@material-ui/core";
+/*::::::::::::::::::::: 
+::::  Dependencies ::::
+:::::::::::::::::::::::*/
+
+//  React
 import { useEffect, useState } from "react";
+//  Redux
 import { useDispatch, useSelector } from "react-redux";
 import { add_to_cart_action, product_added_action, product_detailed_action, show_modal_action, show_notif_action } from "../../redux/ducks";
+//  Styles
+import { Button, CircularProgress, MenuItem, TextField, useMediaQuery } from "@material-ui/core";
+import ProductStyles from "../../styles/ProductStyles";
+import { BookmarkRounded, Grade } from '@material-ui/icons';
+//  Components
 import Notification from "./Notification";
 import Modal from "./Modal";
+
+
+/*::::::::::::::::::::: 
+:::::  Component  :::::
+:::::::::::::::::::::::*/
 
 const Products = () => {
     //  Styles
@@ -188,7 +200,9 @@ const Products = () => {
             </main>
 
         <Notification />
-        <Modal />
+        <Modal 
+            addToCartModal={addToCart}
+        />
         </>
         :
         <main className={classes.mainLoad}>
