@@ -1,14 +1,28 @@
-import { FirebaseAuthConsumer } from "@react-firebase/auth";
+/*::::::::::::::::::::: 
+::::  Dependencies ::::
+:::::::::::::::::::::::*/
+
+//  React
 import { useEffect } from "react";
+//  Redux
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
 import { update_state_user_action } from "../redux/ducks";
+//  Router
+import { useHistory } from "react-router";
+//  Firebase
+import { FirebaseAuthConsumer } from "@react-firebase/auth";
+//  Components
 import Cart from "./products/Cart";
 import Header from "./products/Header";
 import Products from "./products/Products";
 
+
+/*::::::::::::::::::::: 
+:::::  Component  :::::
+:::::::::::::::::::::::*/
+
 const Main = () => {
-    //  Disptach
+    //  Dispatch
     const dispatch = useDispatch()
     //  Global states
     const { products: productsTab } = useSelector(state => state.style)
@@ -22,6 +36,10 @@ const Main = () => {
         }
         // eslint-disable-next-line
     }, [fbUser])
+
+    window.addEventListener('error', function(e){
+        console.log(e);
+    })
 
     return (  
     <>

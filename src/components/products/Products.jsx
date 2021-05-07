@@ -10,7 +10,7 @@ import { add_to_cart_action, product_added_action, product_detailed_action, show
 //  Styles
 import { Button, CircularProgress, MenuItem, TextField, useMediaQuery } from "@material-ui/core";
 import ProductStyles from "../../styles/ProductStyles";
-import { BookmarkRounded, Grade } from '@material-ui/icons';
+import { BookmarkRounded } from '@material-ui/icons';
 //  Components
 import Notification from "./Notification";
 import Modal from "./Modal";
