@@ -11,7 +11,7 @@ import { set_auth_error_msg_action, update_state_user_action } from "../../redux
 import { useHistory } from "react-router";
 //  Firebase
 import { emailAndPasswordLogin, facebookLogIn, googleLogIn, registerNewUser, resetPasswordOption } from "../../helpers/authMethods";
-import { FirebaseAuthConsumer } from "@react-firebase/auth";
+import { FirebaseAuthConsumer, IfFirebaseAuthed } from "@react-firebase/auth";
 // import firebase from "firebase/app";
 //  Styles
 import { Button, CssBaseline, Grid, Link, Paper, TextField, Typography } from "@material-ui/core";
@@ -41,6 +41,7 @@ const Form = () => {
     const [errorEmail, setErrorEmail] = useState('');
     const [errorPassword, setErrorPassword] = useState('');
     const [errorGeneral, setErrorGeneral] = useState(null);
+    const [errorAuthCode, setErrorAuthCode] = useState(null);
     const [successGeneral, setSuccessGeneral] = useState(null);
     // const [userLocalState, setUserLocalState] = useState({
     //     _isSignedIn: null,
@@ -58,6 +59,9 @@ const Form = () => {
 
     // Log in validation with email and password
     const validateCredentials = async() => {
+        setErrorEmail(null);
+        setErrorPassword(null);
+        // setErrorGeneral(null);
 
         if(resetPassword){
             if (userCredentials.email.trim() === '') {
@@ -106,7 +110,9 @@ const Form = () => {
 
     //  Error messages
     useEffect(() => {
-        if(fbAuthError !== null){
+        console.log(fbAuthError);
+
+        // if(fbAuthError){
             switch (fbAuthError) {
                 case 'auth/user-not-found':
                     setErrorEmail('El email no es correcto');
@@ -135,15 +141,18 @@ const Form = () => {
                 case 'auth/account-exists-with-different-credential':
                     setErrorGeneral('Ya tienes registrada esta cuenta con otras credenciales. Intenta con otra cuenta');
                     break;
+                case 'auth/popup-closed-by-user':
+                    setErrorGeneral('La ventana emergente se cerró, intenta de nuevo');
+                    break;
                 default:
                     setErrorEmail(null);
                     setErrorPassword(null);
                     setErrorGeneral(null);
                     break;
             }
-        } else {
+        // } else {
 
-        }
+        // }
         // eslint-disable-next-line
     }, [fbAuthError, errorEmail, errorPassword, errorGeneral])
 
@@ -297,6 +306,7 @@ const Form = () => {
                                     disabled={false}
                                     onClick={() => {
                                         const loginFacebook = facebookLogIn();
+                                        setErrorAuthCode(loginFacebook);
                                         dispatch(set_auth_error_msg_action(loginFacebook));
                                         }}>
                                     Facebook            
@@ -313,6 +323,7 @@ const Form = () => {
                                     disabled={false}
                                     onClick={() => {
                                         const loginGoogle = googleLogIn();
+                                        setErrorAuthCode(loginGoogle);
                                         dispatch(set_auth_error_msg_action(loginGoogle));
                                         }}>
                                     Google            
@@ -337,9 +348,13 @@ const Form = () => {
         // });
         setTimeout(() => {
             dispatch(update_state_user_action(fbAuthConsumer));
-        }, 100);
+        }, 10);
+
         }}
     </FirebaseAuthConsumer>
+    <IfFirebaseAuthed>
+
+    </IfFirebaseAuthed>
     </>
     )
 }
