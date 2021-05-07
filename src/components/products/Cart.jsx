@@ -17,8 +17,9 @@ const Cart = () => {
     const dispatch = useDispatch();
     //Global states
     const cartArray = useSelector(state => state.cart);
-    //Local state
+    //Local states
     const [totalPrice, setTotalPrice] = useState(0);
+    const [showPayment, setShowPayment] = useState(false);
 
     const handleDelete = (id) => {
         const cartFiltered = cartArray.filter(item => item.id !== id);
@@ -67,6 +68,17 @@ const Cart = () => {
         totalPriceCalc();
         // eslint-disable-next-line
     }, [cartArray])
+
+    //  Show payment
+    const handlePayment = () => {
+        setShowPayment(true);
+        setTimeout(() => {
+            setShowPayment(false);
+            const cartEmpty = [];
+            dispatch(remove_from_cart_action(cartEmpty));
+            dispatch(product_removed_action());
+        }, 6000);
+    }
 
     return (
     <>
@@ -122,9 +134,22 @@ const Cart = () => {
             <Button 
                 variant="outlined" 
                 className={classes.cartPay}
+                onClick={() => handlePayment()}
                 style={{width: matches_720 ? '60%' : '95%'}}>Pagar total: <strong className={classes.cartTotalPrice}> 
                 ${totalPrice.toFixed(2)} 
             </strong></Button>
+
+            {showPayment ?
+            <div className={classes.payContainer}>
+                <div 
+                    className={classes.payDiv}
+                    style={{width: matches_1240 ? '40%' : matches_524 ? '55%' : '80%'}}>
+                    <h4 className={classes.payTitle}>Su pago ha sido un éxito. Espere sus productos en los próximos días</h4>
+                </div>
+            </div>
+            :
+            null
+            }
         </main>
 
         :

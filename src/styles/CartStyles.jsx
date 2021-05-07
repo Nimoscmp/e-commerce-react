@@ -11,7 +11,8 @@ const CartStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         marginTop: '6rem',
         padding: '1rem',
-        fontFamily: 'Montserrat'
+        fontFamily: 'Montserrat',
+        position: 'relative'
     },
     cartDiv : {
         position: 'relative',
@@ -148,6 +149,37 @@ const CartStyles = makeStyles((theme) => ({
     cartEmpty : {
         padding: '0.25rem'
     },
+
+    /*::::::::::::::::::::: 
+    ::: Payment styles ::::
+    :::::::::::::::::::::::*/
+
+    payContainer : {
+        position : 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: 'calc(100vh - 6rem)',
+        zIndex: '10002',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#fff'
+    },
+    payDiv : {
+        width: '80%',
+        height: '15rem',
+        backgroundColor: '#699967',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '0.75rem',
+        borderRadius: '10px'
+    },
+    payTitle : {
+        margin: '0.25rem',
+        color: '#fff'
+    }
 }))
 
 export default CartStyles

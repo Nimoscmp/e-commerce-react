@@ -12,7 +12,7 @@ import { useHistory } from "react-router";
 //  Firebase
 import { emailAndPasswordLogin, facebookLogIn, googleLogIn, registerNewUser, resetPasswordOption } from "../../helpers/authMethods";
 import { FirebaseAuthConsumer } from "@react-firebase/auth";
-import firebase from "firebase/app";
+// import firebase from "firebase/app";
 //  Styles
 import { Button, CssBaseline, Grid, Link, Paper, TextField, Typography } from "@material-ui/core";
 import Alert from '@material-ui/lab/Alert';
@@ -42,11 +42,11 @@ const Form = () => {
     const [errorPassword, setErrorPassword] = useState('');
     const [errorGeneral, setErrorGeneral] = useState(null);
     const [successGeneral, setSuccessGeneral] = useState(null);
-    const [userLocalState, setUserLocalState] = useState({
-        _isSignedIn: null,
-        _user: null,
-        _providerId: null
-    })
+    // const [userLocalState, setUserLocalState] = useState({
+    //     _isSignedIn: null,
+    //     _user: null,
+    //     _providerId: null
+    // })
 
     //  Save username and password when writing
     const handleChange = e => {
