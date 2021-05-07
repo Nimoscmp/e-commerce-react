@@ -40,12 +40,12 @@ export const resetPasswordOption = async(email) => {
     return errorCode;
 }
 
-export const googleLogIn = () => {
+export const googleLogIn = async() => {
     let errorCode = null;
 
     try {
         const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(googleAuthProvider);
+        await firebase.auth().signInWithPopup(googleAuthProvider);
     } catch (error) {
         console.log(error);
         errorCode = error.code;
@@ -54,12 +54,12 @@ export const googleLogIn = () => {
     return errorCode;
 }
 
-export const facebookLogIn = () => {
+export const facebookLogIn = async() => {
     let errorCode = null;
 
     try {
         const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
-        firebase.auth().signInWithPopup(facebookAuthProvider);
+        await firebase.auth().signInWithPopup(facebookAuthProvider);
     } catch (error) {
         console.log(error);
         errorCode = error.code;
@@ -68,11 +68,11 @@ export const facebookLogIn = () => {
     return errorCode;
 }
 
-export const logOut = () => {
+export const logOut = async() => {
     let errorCode = null; 
 
     try {
-        firebase.auth().signOut();
+        await firebase.auth().signOut();
     } catch (error) {
         console.log(error);
         errorCode = error.code;

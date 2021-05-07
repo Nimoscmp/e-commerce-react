@@ -112,7 +112,7 @@ const Form = () => {
     useEffect(() => {
         console.log(fbAuthError);
 
-        // if(fbAuthError){
+        if(errorEmail === null && errorPassword === null){
             switch (fbAuthError) {
                 case 'auth/user-not-found':
                     setErrorEmail('El email no es correcto');
@@ -150,10 +150,11 @@ const Form = () => {
                     setErrorGeneral(null);
                     break;
             }
-        // } else {
+        } 
+        // else {
 
         // }
-        // eslint-disable-next-line
+        
     }, [fbAuthError, errorEmail, errorPassword, errorGeneral])
 
     //  Routing
@@ -348,7 +349,7 @@ const Form = () => {
         // });
         setTimeout(() => {
             dispatch(update_state_user_action(fbAuthConsumer));
-        }, 10);
+        }, 100);
 
         }}
     </FirebaseAuthConsumer>
